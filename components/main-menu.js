@@ -8,6 +8,9 @@ import {
 
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Dimensions from 'Dimensions';
+
+const iconSize = parseInt(Dimensions.get('window').width / 10);
 
 export default class MainMenu extends Component {
   render() {
@@ -15,19 +18,19 @@ export default class MainMenu extends Component {
       <View style={styles.container}>
         <View style={styles.newsContainer}>
           <TouchableOpacity onPress={() => { Actions.FgaNews() }}>
-            <Icon name="newspaper-o" size={60} color="#333" />
+            <Icon name="newspaper-o" size={iconSize} color="#333" />
           </TouchableOpacity>
         </View>
 
         <View style={styles.eventsContainer}>
           <TouchableOpacity onPress={() => { Actions.Events() }}>
-            <Icon name="calendar" size={60} color="#333" />
+            <Icon name="calendar" size={iconSize} color="#333" />
           </TouchableOpacity>
         </View>
 
         <View style={styles.moreContainer}>
           <TouchableOpacity onPress={() => { Actions.MoreMenu() }}>
-            <Icon name="bars" size={60} color="#333" />
+            <Icon name="bars" size={iconSize} color="#333" />
           </TouchableOpacity>
         </View>
       </View>
