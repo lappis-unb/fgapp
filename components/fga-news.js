@@ -59,8 +59,8 @@ class NewsListItem extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, flexDirection: 'row', height: 70, margin: 5, marginBottom: 10, borderWidth: 1, padding: 5}}>
-        <View style={{flex: 1, alignItems: 'center'}}>
+      <View style={{flex: 1, backgroundColor: '#e4e4e4' ,flexDirection: 'row', height: 70, margin: 5, marginBottom: 15, padding: 5}}>
+        <View style={{flex: 1, alignItems: 'center', backgroundColor: '#ffffff', marginRight: 5}}>
           <View style={{flex: 1}}>
             <Text style={{color: '#000000', fontSize: 18}}>{this.state.day}</Text>
           </View>
@@ -70,7 +70,7 @@ class NewsListItem extends Component {
           </View>
         </View>
 
-        <View style={{flex: 4, justifyContent: 'center'}}>
+        <View style={{flex: 5, justifyContent: 'center'}}>
           <View style={{flex: 1}}>
             <Text numberOfLines={1} style={{color: '#000000', fontWeight: '800', fontSize: 18}}>{this.props.title}</Text>
           </View>
