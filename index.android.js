@@ -12,6 +12,8 @@ import {
   View
 } from 'react-native';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 export default class FGApp extends Component {
   render() {
     return (
@@ -19,9 +21,12 @@ export default class FGApp extends Component {
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
+
         <Text style={styles.instructions}>
           To get started, edit index.android.js
+          <Icon name="rocket" size={30} color="#900" />
         </Text>
+
         <Text style={styles.instructions}>
           Double tap R on your keyboard to reload,{'\n'}
           Shake or press menu button for dev menu
