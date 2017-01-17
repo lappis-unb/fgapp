@@ -12,6 +12,8 @@ import MainMenu from './main-menu';
 import FgaNews from './fga-news';
 import Events from './events';
 import DrawerMenu from './drawer-menu';
+import MoreMenu from './more-menu';
+import Article from './article';
 
 export default class App extends Component {
   constructor(props) {
