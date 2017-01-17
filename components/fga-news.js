@@ -7,27 +7,33 @@ import {
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-const fakeData = {
-  title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-  date: '2017/01/17 11:43:04',
-  summary: 'Duis pretium augue ante, eu luctus quam sollicitudin a fames ac in faucibus . Vivamus ac ultrices libero. Praesent nec auctor mauris'
-}
 
 export default class FgaNews extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      dataSource: ds.cloneWithRows([1,2,3,4,5,6,7,8,9,10]) // just to have 10 rows on the prototype
+   this.state = {
+      dataSource: ds.cloneWithRows([]) // just to have 10 rows on the prototype
     }
   }
 
   buildRowData(rowData) {
     return <NewsListItem
-              title={fakeData.title}
-              date={fakeData.date}
-              summary={fakeData.summary} />;
+              title={rowData.title}
+              date={rowData.created_at}
+              summary={"This month in World War II, Hitler was killed."} />;
   }
+
+  componentDidMount() {
+    fetch('https://fga.unb.br/api/v1/articles?parent_id=46')
+      .then((response) => response.json())
+        .then((responseJson) => {
+          this.setState({
+            dataSource: ds.cloneWithRows(responseJson.articles)
+          });
+        });
+  }
+
 
   render() {
     return (
@@ -52,7 +58,7 @@ class NewsListItem extends Component {
         month = date.toLocaleString(locale, { month: "long" });
 
     this.state = {
-      day: date.getDay(),
+      day: date.getDate(),
       month: month.toLocaleUpperCase().split(' ')[1].substr(0, 3)
     }
   }
