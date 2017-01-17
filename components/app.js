@@ -11,6 +11,7 @@ import MainMenu from './main-menu';
 import FgaNews from './fga-news';
 import Events from './events';
 import MoreMenu from './more-menu';
+import Article from './article';
 
 export default class App extends Component {
   render() {
@@ -20,7 +21,8 @@ export default class App extends Component {
           <Router>
             <Scene key="FgaNews" component={FgaNews} title='News' hideNavBar={true} />
             <Scene key="Events" component={Events} title='Events' hideNavBar={true} />
-            <Scene key="MoreMenu" component={MoreMenu} title='More opstions' hideNavBar={true} />
+            <Scene key="MoreMenu" component={MoreMenu} title='More options' hideNavBar={true} />
+            <Scene key="Article" component={Article} title='Article' hideNavBar={true} />
           </Router>
         </View>
 
