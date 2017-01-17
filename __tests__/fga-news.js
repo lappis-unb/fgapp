@@ -1,13 +1,13 @@
 import 'react-native';
 import React from 'react';
-import FGApp from '../index.android.js';
+import FgaNews from '../components/fga-news.js';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <FGApp/>
+    <FgaNews/>
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
