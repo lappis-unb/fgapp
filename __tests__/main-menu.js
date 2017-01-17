@@ -1,13 +1,14 @@
 import 'react-native';
 import React from 'react';
-import FGApp from '../index.android.js';
+import MainMenu from '../components/main-menu.js';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <FGApp/>
+    <MainMenu/>
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
+
