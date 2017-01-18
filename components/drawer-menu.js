@@ -5,7 +5,7 @@ import {
   StyleSheet
 } from 'react-native';
 
-export default class MoreMenu extends Component {
+export default class DrawerMenu extends Component {
   render() {
     return (
       <View style={styles.container}>
