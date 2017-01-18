@@ -14,6 +14,7 @@ import Events from './events';
 import DrawerMenu from './drawer-menu';
 import MoreMenu from './more-menu';
 import Article from './article';
+import Professors from './professors';
 
 export default class App extends Component {
   constructor(props) {

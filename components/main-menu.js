@@ -82,6 +82,11 @@ const styles = StyleSheet.create({
     color: '#333',
     width: (iconSize*1.5),
     textAlign: 'center',
+  },
+
+  professors: {
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center'
   }
 });
