@@ -13,24 +13,29 @@ import Dimensions from 'Dimensions';
 const iconSize = parseInt(Dimensions.get('window').width / 10);
 
 export default class MainMenu extends Component {
+  loadScene(sceneKey) {
+    this.props.closeDrawerMenu();
+    Actions[sceneKey] ({type: 'replace'});
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.newsContainer}>
-          <TouchableOpacity onPress={() => { Actions.FgaNews() }}>
-            <Icon name="newspaper-o" size={iconSize} color="#333" />
+          <TouchableOpacity onPress={() => { this.loadScene('FgaNews'); }}>
+            <Icon style={styles.icons} name="newspaper-o" />
           </TouchableOpacity>
         </View>
 
         <View style={styles.eventsContainer}>
-          <TouchableOpacity onPress={() => { Actions.Events() }}>
-            <Icon name="calendar" size={iconSize} color="#333" />
+          <TouchableOpacity onPress={() => { this.loadScene('Events'); }}>
+            <Icon style={styles.icons} name="calendar" />
           </TouchableOpacity>
         </View>
 
         <View style={styles.moreContainer}>
-          <TouchableOpacity onPress={() => { Actions.MoreMenu() }}>
-            <Icon name="bars" size={iconSize} color="#333" />
+          <TouchableOpacity onPress={() => { this.props.toggleDrawerMenu() }}>
+            <Icon style={styles.icons} name="bars" />
           </TouchableOpacity>
         </View>
 
@@ -71,9 +76,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 
-  professors: {
-    flex: 1,
-    alignItems: 'center',
+  icons: {
+    padding: (iconSize/5),
+    fontSize: iconSize,
+    color: '#333',
+    width: (iconSize*1.5),
+    textAlign: 'center',
     justifyContent: 'center'
   }
 });
