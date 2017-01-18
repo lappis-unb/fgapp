@@ -38,6 +38,12 @@ export default class MainMenu extends Component {
             <Icon style={styles.icons} name="bars" />
           </TouchableOpacity>
         </View>
+
+        <View style={styles.moreContainer}>
+          <TouchableOpacity onPress={() => { Actions.FgaProfessors() }}>
+            <Icon name="bars" size={iconSize} color="#333" />
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
