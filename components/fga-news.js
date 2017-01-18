@@ -9,7 +9,6 @@ import {
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-
 export default class FgaNews extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +43,8 @@ export default class FgaNews extends Component {
       <View style={{flex: 1}}>
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={(rowData) => this.buildRowData(rowData) }
+          renderRow={(rowData) => this.buildRowData(rowData)}
+          enableEmptySections={true}
         />
       </View>
     );
