@@ -42,10 +42,17 @@ exports[`test renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#333",
-              "fontSize": 60,
+              "color": undefined,
+              "fontSize": 12,
             },
-            undefined,
+            Object {
+              "color": "#333",
+              "fontSize": 75,
+              "justifyContent": "center",
+              "padding": 15,
+              "textAlign": "center",
+              "width": 112.5,
+            },
             Object {
               "fontFamily": "FontAwesome",
               "fontStyle": "normal",
@@ -91,10 +98,17 @@ exports[`test renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#333",
-              "fontSize": 60,
+              "color": undefined,
+              "fontSize": 12,
             },
-            undefined,
+            Object {
+              "color": "#333",
+              "fontSize": 75,
+              "justifyContent": "center",
+              "padding": 15,
+              "textAlign": "center",
+              "width": 112.5,
+            },
             Object {
               "fontFamily": "FontAwesome",
               "fontStyle": "normal",
@@ -140,10 +154,17 @@ exports[`test renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#333",
-              "fontSize": 60,
+              "color": undefined,
+              "fontSize": 12,
             },
-            undefined,
+            Object {
+              "color": "#333",
+              "fontSize": 75,
+              "justifyContent": "center",
+              "padding": 15,
+              "textAlign": "center",
+              "width": 112.5,
+            },
             Object {
               "fontFamily": "FontAwesome",
               "fontStyle": "normal",

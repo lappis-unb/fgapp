@@ -11,6 +11,7 @@ import { Scene, Router } from 'react-native-router-flux';
 import MainMenu from './main-menu';
 import FgaNews from './fga-news';
 import Events from './events';
+import Article from './article';
 import DrawerMenu from './drawer-menu';
 
 export default class App extends Component {
@@ -52,8 +53,9 @@ export default class App extends Component {
               <Router>
                 <Scene key="FgaNews" component={FgaNews} title='News' hideNavBar={true} />
                 <Scene key="Events" component={Events} title='Events' hideNavBar={true} />
+                <Scene key="Article" component={Article} title='Article' hideNavBar={true} />
               </Router>
-            </DrawerLayoutAndroid>
+          </DrawerLayoutAndroid>
         </View>
 
         <View style={styles.mainMenuContainer}>
