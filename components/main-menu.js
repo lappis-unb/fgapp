@@ -38,13 +38,6 @@ export default class MainMenu extends Component {
             <Icon style={styles.icons} name="bars" />
           </TouchableOpacity>
         </View>
-
-        <View style={styles.professors}>
-          <TouchableOpacity onPress={() => { Actions.Professors() }}>
-            <Icon name="bars" size={iconSize} color="#333" />
-          </TouchableOpacity>
-        </View>
-
       </View>
     );
   }
@@ -82,11 +75,5 @@ const styles = StyleSheet.create({
     color: '#333',
     width: (iconSize*1.5),
     textAlign: 'center',
-  },
-
-  professors: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
   }
 });
