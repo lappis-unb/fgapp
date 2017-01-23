@@ -7,18 +7,17 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+const monthNamesShort = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+
 export default class NewsListItem extends Component {
   constructor(props) {
     super(props);
 
-
-    const date = new Date(props.date),
-        locale = "pt-BR",
-        month = date.toLocaleString(locale, { month: "long" });
+    const date = new Date(props.date);
 
     this.state = {
       day: date.getDate(),
-      month: month.toLocaleUpperCase().split(' ')[1].substr(0, 3)
+      month: monthNamesShort[date.getMonth()].toUpperCase()
     }
   }
 
