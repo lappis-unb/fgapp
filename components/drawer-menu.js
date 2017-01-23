@@ -16,7 +16,7 @@ export default class DrawerMenu extends Component {
     super();
     this.state = {
       dataSource: ds.cloneWithRows([
-        {text: 'Professores', icon: 'newspaper-o', transitionTo: Actions.FgaNews},
+        {text: 'Professores', icon: 'newspaper-o', transitionTo: Actions.FgaProfessors},
         {text: 'Tcc', icon: 'envira', transitionTo: Actions.Events},
         {text: 'Sobre', icon: 'eraser', transitionTo: Actions.FgaNews}
       ])
