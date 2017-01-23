@@ -30,7 +30,7 @@ export default class FgaProfessors extends Component {
   componentDidMount() {
     let apiUrl = "https://fga.unb.br/";
     let apiNamespace = "api/v1/profiles/";
-    fetch(apiUrl + apiNamespace + '/35/members')
+    fetch(apiUrl + apiNamespace + '/35/members?order=name ASC')
       .then((response) => response.json())
         .then((responseJson) => {
           this.setState({
