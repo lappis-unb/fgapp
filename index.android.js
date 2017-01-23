@@ -9,7 +9,7 @@ import {
   AppRegistry,
 } from 'react-native';
 
-import App from './js/components/app';
+import { App } from './js/components';
 
 export default class FGApp extends Component {
   render() {

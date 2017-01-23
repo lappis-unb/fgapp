@@ -6,9 +6,12 @@ import {
   DrawerLayoutAndroid
 } from 'react-native';
 
-import MainMenu from './main-menu';
-import DrawerMenu from './drawer-menu';
-import AppRoutes from './app-routes';
+import {
+  MainMenu,
+  DrawerMenu,
+  AppRoutes
+} from '.';
+
 
 export default class App extends Component {
   constructor(props) {

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
 
-import FgaNews from './fga-news';
-import Events from './events';
-import Article from './article';
-import FgaProfessors from './fga-professors';
-import Professor from './professor';
+import {
+  FgaNews,
+  Events,
+  Article,
+  FgaProfessors,
+  Professor
+} from '.';
 
 const AppRoutes = () => (
   <Router>
