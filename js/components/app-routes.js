@@ -9,9 +9,11 @@ import {
   Professor
 } from '.';
 
+import { FgaNewsContainer } from '../containers';
+
 const AppRoutes = () => (
   <Router>
-    <Scene key="FgaNews" component={FgaNews} title='News' hideNavBar={true} />
+    <Scene key="FgaNews" component={FgaNewsContainer} title='News' hideNavBar={true} />
     <Scene key="Events" component={Events} title='Events' hideNavBar={true} />
     <Scene key="Article" component={Article} title='Article' hideNavBar={true} />
     <Scene key="FgaProfessors" component={FgaProfessors} title='Professors' hideNavBar={true} />
