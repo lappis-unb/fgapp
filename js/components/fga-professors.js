@@ -29,7 +29,9 @@ export default class FgaProfessors extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchProfessors();
+    if (this.props.professors.length === 0) {
+      this.props.fetchProfessors();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
