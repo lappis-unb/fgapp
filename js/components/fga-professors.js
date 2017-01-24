@@ -16,7 +16,7 @@ export default class FgaProfessors extends Component {
     super(props);
 
    this.state = {
-      dataSource: ds.cloneWithRows([])
+      dataSource: ds.cloneWithRows(props.professors)
     }
   }
 
@@ -29,13 +29,13 @@ export default class FgaProfessors extends Component {
   }
 
   componentDidMount() {
-    ProfessorsService.get()
-      .then((response) => response.data)
-      .then((responseJson) => {
-        this.setState({
-          dataSource: ds.cloneWithRows(responseJson.people)
-        });
-      });
+    this.props.fetchProfessors();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      dataSource: ds.cloneWithRows(nextProps.professors)
+    });
   }
 
   render() {
