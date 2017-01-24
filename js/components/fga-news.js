@@ -17,9 +17,11 @@ export default class FgaNews extends Component {
   constructor(props) {
     super(props);
 
-   this.state = {
+    this.state = {
       dataSource: ds.cloneWithRows(props.articles)
     }
+
+    this.fetchMoreArticles = this.fetchMoreArticles.bind(this);
   }
 
   componentDidMount() {
@@ -29,9 +31,17 @@ export default class FgaNews extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.page !== this.props.page) {
+      this.props.fetchArticles(nextProps.page);
+    }
+
     this.setState({
       dataSource: ds.cloneWithRows(nextProps.articles),
     });
+  }
+
+  fetchMoreArticles() {
+    this.props.updatePage(this.props.page + 1);
   }
 
   buildRowData(rowData) {
@@ -52,7 +62,8 @@ export default class FgaNews extends Component {
                   dataSource={this.state.dataSource}
                   renderRow={(rowData) => this.buildRowData(rowData)}
                   enableEmptySections={true}
-                  initialListSize={15}
+                  initialListSize={20}
+                  onEndReached={this.fetchMoreArticles}
                 />
     }
 
@@ -60,8 +71,6 @@ export default class FgaNews extends Component {
   }
 
   render() {
-    console.log('ARTICLES LENGTH: ', this.props.articles.length);
-
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
         {this.getContent()}
