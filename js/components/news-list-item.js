@@ -7,7 +7,12 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-const monthNamesShort = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Dimensions from 'Dimensions';
+import { Card, Button } from 'react-native-material-design';
+
+const imageSize = parseInt(Dimensions.get('window').width / 5);
+const monthNames = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 
 export default class NewsListItem extends Component {
   constructor(props) {
@@ -17,7 +22,7 @@ export default class NewsListItem extends Component {
 
     this.state = {
       day: date.getDate(),
-      month: monthNamesShort[date.getMonth()].toUpperCase()
+      month: monthNames[date.getMonth()]
     }
   }
 
@@ -31,90 +36,55 @@ export default class NewsListItem extends Component {
 
   render() {
     return (
-      <TouchableOpacity onPress={() => this.goToArticle()}>
-        <View style={styles.container}>
-          <View style={styles.dateContainer}>
-            <View style={styles.day}>
-              <Text style={styles.dayText}>{this.state.day}</Text>
-            </View>
-
-            <View style={styles.month}>
-              <Text style={styles.monthText}>{this.state.month}</Text>
-            </View>
-          </View>
-
-          <View style={styles.newsContainer}>
-            <View style={styles.title}>
-              <Text numberOfLines={1} style={styles.titleText}>{this.props.title}</Text>
-            </View>
-
-            <View style={styles.summary}>
-              <Text numberOfLines={2} style={styles.summaryText}>{this.props.summary}</Text>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
+      <View style={styles.container}>
+          <Card>
+              <Card.Body>
+                <View style={styles.newsContainer}>
+                  <View style={styles.newsContent}>
+                    <Text style={styles.newsTitle}>{this.props.title}</Text>
+                    <Text style={styles.newsDate}>{this.state.day} de {this.state.month}</Text>
+                  </View>
+                  <View style={styles.newsImageContainer}>
+                    <Icon name="picture-o" style={styles.newsImagePlaceholder} />
+                  </View>
+                </View>
+              </Card.Body>
+          </Card>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#e4e4e4',
-    flexDirection: 'row',
-    height: 70,
-    margin: 5,
-    marginBottom: 15,
-    padding: 5
-  },
-
-  dateContainer: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    marginRight: 10,
-  },
-
-  day: {
     flex: 1
-  },
-
-  month: {
-    flex: 1
-  },
-
-  dayText: {
-    color: '#000000',
-    fontSize: 18
-  },
-
-  monthText: {
-    color: '#000000'
   },
 
   newsContainer: {
     flex: 5,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexDirection: 'row'
   },
 
-  title: {
-    flex: 1
-  },
-
-  titleText: {
-    color: '#000000',
-    fontWeight: '800',
-    fontSize: 16
-  },
-
-  summary: {
+  newsContent: {
     flex: 2,
-    marginTop: 5
+    justifyContent: 'space-between'
   },
 
-  summaryText: {
-    color: '#444',
-    fontSize: 12
+  newsImageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  newsImagePlaceholder: {
+    flex: 1,
+    fontSize: imageSize,
+    color: '#a29d9d'
+  },
+
+  newsTitle: {
+    color: '#005263',
+    fontWeight: 'bold'
   }
 });

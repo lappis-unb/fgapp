@@ -5,7 +5,8 @@ import {
   Text,
   ListView,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  StyleSheet
 } from 'react-native';
 
 import { ArticleService } from '../services';
@@ -72,7 +73,7 @@ export default class FgaNews extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+      <View style={styles.container}>
         {this.getContent()}
       </View>
     );
@@ -90,3 +91,13 @@ FgaNews.propTypes = {
 
   page: React.PropTypes.number.isRequired
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#eee',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row'
+  }
+});
