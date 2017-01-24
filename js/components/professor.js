@@ -36,11 +36,11 @@ export default class Professor extends Component {
         </View> 
 
         <View style={styles.body}>
-          <View style={styles.titleContainer}>
-            <Icon style={styles.titleIcon} name={'envelope'}/>
-          </View>
           <View style={styles.descriptionContainer}>
-            <Text style={styles.description}>{this.props.description}</Text>
+            <Text>
+              <Icon style={styles.descriptionIcon} name={'graduation-cap'}/>
+              <Text style={styles.description}>{this.props.description}</Text>
+            </Text>
           </View>
         </View>
       </ScrollView>
@@ -49,9 +49,16 @@ export default class Professor extends Component {
 }
 
 const styles = StyleSheet.create({
-  header: {
+  component: {
     backgroundColor: '#eeeeee',
-    padding: 10,
+    backgroundColor: '#cdcdcd',
+  },
+  header: {
+    justifyContent: 'center',
+    backgroundColor: '#cdcdcd',
+    backgroundColor: '#eeeeee',
+    minHeight: 150,
+    maxHeight: 160,
   },
   headerWrapper:{
     flexDirection: 'row',
@@ -96,21 +103,22 @@ const styles = StyleSheet.create({
     color: 'black'
   },
   body: {
-    marginTop: 20,
-    paddingLeft: 16,
-    paddingRight: 16,
-    backgroundColor: 'red'
-  },
-  titleContainer: {
-    backgroundColor: 'green'
+    backgroundColor: '#cdcdcd',
+    paddingTop: 12,
+    paddingLeft: 12,
+    paddingRight: 12,
   },
   descriptionContainer: {
+    backgroundColor: 'white',
+    padding: 12,
+    borderRadius: 20,
+  },
+  descriptionIcon: {
+    color: '#005263',
+    fontSize: 36,
   },
   description: {
-    paddingBottom: 10,
-    marginBottom: 20,
     color: '#444',
     fontSize: 16,
-    textAlign: 'justify'
   },
 })
