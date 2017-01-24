@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import {
   Linking,
-  View,
   Text,
-  TouchableOpacity,
+  StyleSheet
 } from 'react-native';
 
 export default class OpenEmail extends Component {
@@ -13,11 +12,16 @@ export default class OpenEmail extends Component {
 
   render() {
     return (
-      <TouchableOpacity onPress={this.handleClick}>
-        <View>
-          <Text>{this.props.email}</Text>
-        </View>
-      </TouchableOpacity>
+      <Text numberOfLines={1} onPress={this.handleClick} style={styles.text}>{this.props.email}</Text>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  text: {
+    width: 200,
+    fontWeight: 'bold',
+    fontSize: 21,
+    color: 'black'
+  },
+});

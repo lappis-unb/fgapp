@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import OpenEmail from './open-email';
 import {
-  Linking,
   View,
   StyleSheet,
   Text,
   WebView,
   Image,
-  TouchableOpacity,
   ScrollView
 } from 'react-native';
+import OpenEmail from './open-email';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Professor extends Component {
@@ -28,13 +26,11 @@ export default class Professor extends Component {
               </View>
               <View style={styles.emailContainer}>
                 <Icon style={styles.emailIcon} name={'envelope'}/>
-								<OpenEmail email={this.props.email} />
-        </View>
+                <OpenEmail email={this.props.email} />
               </View>
             </View>
           </View>
-        </View> 
-
+        </View>
         <View style={styles.body}>
           <View style={styles.descriptionContainer}>
             <Text>
@@ -97,11 +93,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
     color: '#005263',
   },
-  email: {
-    fontWeight: 'bold',
-    fontSize: 21,
-    color: 'black'
-  },
   body: {
     backgroundColor: '#cdcdcd',
     paddingTop: 12,
@@ -120,5 +111,5 @@ const styles = StyleSheet.create({
   description: {
     color: '#444',
     fontSize: 16,
-  },
+  }
 })
