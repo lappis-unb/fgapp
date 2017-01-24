@@ -8,6 +8,7 @@ import Article from './article';
 import FgaProfessors from './fga-professors';
 import Professor from './professor';
 import NewsListItem from './news-list-item';
+import ProfessorsListItem from './professors-list-item';
 
 export {
   App,
@@ -19,5 +20,6 @@ export {
   Events,
   FgaProfessors,
   Professor,
-  NewsListItem
+  NewsListItem,
+  ProfessorsListItem
 };
