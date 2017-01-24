@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => ({
           id: professor.id,
           name: professor.name,
           image: professor.image,
-          additional_data: professor.professor
+          additional_data: professor.additional_data
         }));
 
         dispatch({
