@@ -5,7 +5,8 @@ import FgaNews  from '../components/fga-news';
 const mapStateToProps = (state) => ({
   articles: state.articles.data,
   page: state.articles.page,
-  lastPage: state.articles.lastPage
+  lastPage: state.articles.lastPage,
+  error: state.articles.error
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -38,7 +39,13 @@ const mapDispatchToProps = (dispatch) => ({
           articles,
           lastPage
         });
-      });
+      })
+      .catch(error => {
+        dispatch({
+          type: 'SET_ARTICLES_ERROR',
+          error: true
+        })
+      })
     }
   },
 
@@ -46,6 +53,13 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({
       type: 'UPDATE_ARTICLES_PAGE',
       page: nextPage
+    })
+  },
+
+  updateError(error) {
+    dispatch({
+      type: 'SET_ARTICLES_ERROR',
+      error
     })
   }
 

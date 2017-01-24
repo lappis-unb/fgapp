@@ -6,7 +6,8 @@ import {
   ListView,
   TouchableOpacity,
   ActivityIndicator,
-  StyleSheet
+  StyleSheet,
+  Button
 } from 'react-native';
 
 import ArticleService from '../services/article-service';
@@ -54,12 +55,31 @@ export default class FgaNews extends Component {
             />;
   }
 
+  updatePageError() {
+    this.props.updateError(false);
+    this.props.fetchArticles(this.props.page, this.props.lastPage);
+  }
+
   getContent() {
     let content = '';
+    if (this.props.error == true) {
+      content =
+      <View style={styles.error}>
+        <Text style={styles.textError}> Ocorreu um erro
+        durante o carregamento dos dados!</Text>
+          <Button
+          onPress={() => {this.updatePageError()}}
+          title="Tentar Novamente"
+          color="#21ba57"
+          accessibilityLabel="Recarregar Dados"
+          />
+      </View>
 
-    if (this.props.articles.length === 0) {
+    }
+    else if (this.props.articles.length === 0) {
       content = <ActivityIndicator size={60} color="#21ba57" />;
-    } else {
+    }
+    else {
       content = <ListView
                   dataSource={this.state.dataSource}
                   renderRow={(rowData) => this.buildRowData(rowData)}
@@ -93,5 +113,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row'
+  },
+  error: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column'
+  },
+  textError: {
+    maxWidth: 250,
+    fontWeight:'bold',
+    paddingBottom: 30,
+    fontSize: 20,
+    textAlign: 'center'
   }
 });
