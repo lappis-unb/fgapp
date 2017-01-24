@@ -5,7 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import { ProfessorsListItem } from '.';
+import ProfessorsListItem from './professors-list-item';
 
 import { ProfessorsService } from '../services';
 
