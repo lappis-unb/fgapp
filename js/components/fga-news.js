@@ -17,19 +17,31 @@ export default class FgaNews extends Component {
   constructor(props) {
     super(props);
 
-   this.state = {
+    this.state = {
       dataSource: ds.cloneWithRows(props.articles)
     }
+
+    this.fetchMoreArticles = this.fetchMoreArticles.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchArticles();
+    if (this.props.articles.length === 0) {
+      this.props.fetchArticles(this.props.page);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.page !== this.props.page) {
+      this.props.fetchArticles(nextProps.page);
+    }
+
     this.setState({
-      dataSource: ds.cloneWithRows(nextProps.articles)
+      dataSource: ds.cloneWithRows(nextProps.articles),
     });
+  }
+
+  fetchMoreArticles() {
+    this.props.updatePage(this.props.page + 1);
   }
 
   buildRowData(rowData) {
@@ -50,6 +62,8 @@ export default class FgaNews extends Component {
                   dataSource={this.state.dataSource}
                   renderRow={(rowData) => this.buildRowData(rowData)}
                   enableEmptySections={true}
+                  initialListSize={20}
+                  onEndReached={this.fetchMoreArticles}
                 />
     }
 
@@ -63,4 +77,16 @@ export default class FgaNews extends Component {
       </View>
     );
   }
+}
+
+FgaNews.propTypes = {
+  articles: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      title: React.PropTypes.string,
+      created_at: React.PropTypes.string,
+      body: React.PropTypes.string
+    }).isRequired
+  ),
+
+  page: React.PropTypes.number.isRequired
 }

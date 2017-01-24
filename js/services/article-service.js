@@ -1,12 +1,24 @@
 import { axios } from '../config';
 
+const PARENT_ID = 46,
+      LIMIT = 20,
+      PAGE = 1;
+
 export default class ArticleService {
-  static get(parentId, limit=20, page=1) {
+  static get defaults() {
+    return {
+      parentID: PARENT_ID,
+      limit: LIMIT,
+      page: PAGE
+    }
+  }
+
+  static get(parentId=PARENT_ID, page=PAGE, limit=LIMIT) {
     return axios.get('articles', {
       params: {
         parent_id: parentId,
-        limit,
-        page
+        page,
+        limit
       }
     });
   }
