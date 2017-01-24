@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import OpenEmail from './open-email';
 import {
+  Linking,
   View,
   StyleSheet,
   Text,
   WebView,
   Image,
+  TouchableOpacity,
   ScrollView
 } from 'react-native';
 
@@ -20,7 +23,7 @@ export default class Professor extends Component {
         </View>
 
         <View style={styles.email}>
-          <Text style={styles.email}>{this.props.email}</Text>
+          <OpenEmail email={this.props.email} />
         </View>
 
         <Text style={styles.description}>{this.props.description}</Text>
@@ -35,32 +38,27 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     marginTop: 20
   },
-
   photoContainer: {
-    alignItems: "center",
+    alignItems: 'center',
   },
-
   photo: {
     width: 100,
     height: 100,
     borderRadius: 100
   },
-
   name: {
-    color: "#005263",
+    color: '#005263',
     flex: 5,
     fontSize: 32,
-    fontWeight: "bold",
-    textAlign: "center"
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
-
   email: {
     fontSize: 16,
     marginBottom: 10,
-    textAlign: "center",
-    fontWeight: "bold",
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
-
   description: {
     fontSize: 18,
     paddingBottom: 10,
