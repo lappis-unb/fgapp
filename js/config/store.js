@@ -6,7 +6,10 @@ import {
 } from '../reducers';
 
 export const initialState = {
-  articles: [],
+  articles: {
+    page: 1,
+    data: []
+  },
   professors: []
 };
 
