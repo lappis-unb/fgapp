@@ -9,12 +9,17 @@ import {
   AppRegistry,
 } from 'react-native';
 
+import { Provider } from 'react-redux';
 import { App } from './js/components';
+
+import { store } from './js/config';
 
 export default class FGApp extends Component {
   render() {
     return (
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     );
   }
 }

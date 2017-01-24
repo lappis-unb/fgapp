@@ -18,9 +18,18 @@ export default class FgaNews extends Component {
     super(props);
 
    this.state = {
-      dataSource: ds.cloneWithRows([]),
-      loadingArticles: true
+      dataSource: ds.cloneWithRows(props.articles)
     }
+  }
+
+  componentDidMount() {
+    this.props.fetchArticles();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      dataSource: ds.cloneWithRows(nextProps.articles)
+    });
   }
 
   buildRowData(rowData) {
@@ -31,25 +40,11 @@ export default class FgaNews extends Component {
               summary={"This month in World War II, Hitler was killed."} />;
   }
 
-  componentDidMount() {
-    ArticleService.get(46)
-      .then(response => response.data)
-      .then((response) => {
-        this.setState({
-          dataSource: ds.cloneWithRows(response.articles),
-          loadingArticles: false
-        });
-      });
-  }
+  getContent() {
+    let content = '';
 
-  render() {
-    let content = "";
-
-    if (this.state.loadingArticles) {
-      content = <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                  <ActivityIndicator size={60} color="#21ba57" />
-                </View>
-
+    if (this.props.articles.length === 0) {
+      content = <ActivityIndicator size={60} color="#21ba57" />;
     } else {
       content = <ListView
                   dataSource={this.state.dataSource}
@@ -58,9 +53,13 @@ export default class FgaNews extends Component {
                 />
     }
 
+    return content;
+  }
+
+  render() {
     return (
-      <View style={{flex: 1}}>
-        {content}
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+        {this.getContent()}
       </View>
     );
   }

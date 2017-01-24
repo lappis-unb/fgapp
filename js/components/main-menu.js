@@ -17,20 +17,20 @@ export default class MainMenu extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.newsContainer}>
-          <TouchableOpacity onPress={() => { Actions.FgaNews() }}>
-            <Icon name="newspaper-o" size={iconSize} color="#333" />
+          <TouchableOpacity onPress={() => { Actions.FgaNews({type: 'replace'}) }}>
+            <Icon name="newspaper-o" style={styles.iconStyle} />
           </TouchableOpacity>
         </View>
 
         <View style={styles.eventsContainer}>
-          <TouchableOpacity onPress={() => { Actions.Events() }}>
-            <Icon name="calendar" size={iconSize} color="#333" />
+          <TouchableOpacity onPress={() => { Actions.Events({type: 'replace'}) }}>
+            <Icon name="calendar" style={styles.iconStyle} />
           </TouchableOpacity>
         </View>
 
         <View style={styles.moreContainer}>
           <TouchableOpacity onPress={() => { this.props.toggleDrawerMenu() }}>
-            <Icon name="bars" size={iconSize} color="#333" />
+            <Icon name="bars" style={styles.iconStyle} />
           </TouchableOpacity>
         </View>
 
@@ -45,6 +45,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#efefef',
     borderTopWidth: 1
+  },
+
+  iconStyle: {
+    fontSize: iconSize,
+    color: "#333",
+    paddingLeft: 20,
+    paddingRight: 20,
   },
 
   newsContainer: {
