@@ -7,7 +7,11 @@ import renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <FgaNews/>
+    <FgaNews
+      page={1}
+      articles={[]}
+      fetchArticles={() => []}
+    />
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });

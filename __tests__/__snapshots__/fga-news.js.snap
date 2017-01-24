@@ -3,16 +3,15 @@ exports[`test renders correctly 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "yellow",
       "flex": 1,
+      "flexDirection": "row",
       "justifyContent": "center",
     }
   }>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail">
-    News
-  </Text>
+  <ActivityIndicator
+    animating={true}
+    color="#21ba57"
+    hidesWhenStopped={true}
+    size={60} />
 </View>
 `;
