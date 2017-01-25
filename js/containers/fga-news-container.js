@@ -2,8 +2,6 @@ import { connect } from 'react-redux';
 import { ArticleService } from '../services';
 import FgaNews  from '../components/fga-news';
 
-
-
 const mapStateToProps = (state) => ({
   articles: state.articles.data,
   page: state.articles.page,
@@ -23,7 +21,8 @@ const mapDispatchToProps = (dispatch) => ({
           id: article.id,
           body: article.body,
           title: article.title,
-          created_at: article.created_at
+          created_at: article.created_at,
+          authorName: article.author ? article.author.name : ""
         }));
 
         const link = response.headers.link;

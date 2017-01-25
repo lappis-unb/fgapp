@@ -50,6 +50,7 @@ export default class FgaNews extends Component {
               title={rowData.title}
               date={rowData.created_at}
               body={rowData.body}
+              authorName={rowData.authorName}
             />;
   }
 
@@ -81,14 +82,7 @@ export default class FgaNews extends Component {
 }
 
 FgaNews.propTypes = {
-  articles: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      title: React.PropTypes.string,
-      created_at: React.PropTypes.string,
-      body: React.PropTypes.string
-    }).isRequired
-  ),
-
+  articles: React.PropTypes.array.isRequired,
   page: React.PropTypes.number.isRequired
 }
 

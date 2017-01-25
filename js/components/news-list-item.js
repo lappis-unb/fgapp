@@ -32,7 +32,8 @@ export default class NewsListItem extends Component {
     Actions.Article({
       title: this.props.title,
       body: this.props.body,
-      date: this.props.date
+      date: this.props.date,
+      authorName: this.props.authorName
     });
   }
 

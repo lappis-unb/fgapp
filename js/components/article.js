@@ -14,8 +14,13 @@ export default class Article extends Component {
   constructor(props) {
     super(props);
 
+    var date = new Date(this.props.date);
+
     this.state = {
-      parsedBody: this.parseImageLink(this.props.body)
+      parsedBody: this.parseImageLink(this.props.body),
+      day: date.getDate(),
+      month: date.getMonth() + 1,
+      year: date.getFullYear()
     }
   }
 
@@ -47,7 +52,7 @@ export default class Article extends Component {
         </View>
 
         <View style={styles.dateContainer}>
-          <Text style={styles.date}>{this.props.date}</Text>
+          <Text style={styles.date}>{(this.state.day < 10 ? "0" : "") + this.state.day}/{(this.state.month < 10 ? "0" : "") + this.state.month}/{this.state.year} por {this.props.authorName}</Text>
         </View>
 
         <View style={styles.bodyContainer}>
@@ -80,7 +85,7 @@ const styles = StyleSheet.create({
 
   titleContainer: {
     flex: 7,
-    justifyContent: "center",
+    justifyContent: "center"
   },
 
   title: {
