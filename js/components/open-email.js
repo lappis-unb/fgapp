@@ -1,23 +1,40 @@
 import React, { Component } from 'react';
 import {
   Linking,
-  View,
   Text,
-  TouchableOpacity,
+  StyleSheet,
+  View
 } from 'react-native';
 
 export default class OpenEmail extends Component {
   handleClick = () => {
-    Linking.openURL('mailto:' + this.props.email);
+      Linking.openURL('mailto:' + this.props.email);
   }
 
   render() {
+    let emailLink;
+    if(this.props.email === undefined){
+      emailLink = (
+        <Text numberOfLines={1} style={styles.text}>Não disponível.</Text>
+      )
+    }else{
+      emailLink = (
+        <Text numberOfLines={1} onPress={this.handleClick} style={styles.text}>{this.props.email}</Text>
+      )
+    }
     return (
-      <TouchableOpacity onPress={this.handleClick}>
-        <View>
-          <Text>{this.props.email}</Text>
-        </View>
-      </TouchableOpacity>
+      <View>
+        { emailLink }
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  text: {
+    width: 200,
+    fontWeight: 'bold',
+    fontSize: 21,
+    color: 'black'
+  },
+});

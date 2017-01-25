@@ -25,7 +25,8 @@ export default class ProfessorsListItem extends Component {
     Actions.Professor({
       name: this.props.name,
       email: this.props.additional_data.email,
-      description: this.props.additional_data.description,
+      description: (this.props.additional_data.description === undefined || this.props.additional_data.description === "")?
+      "Não há descrição ainda" : this.props.additional_data.description,
       imageUrl: this.props.image === null ? defaultImageUrl : baseUrl + this.props.image.url
     });
   }
@@ -53,6 +54,7 @@ const styles = StyleSheet.create({
     height: 80,
     alignItems: "center",
     marginLeft: 15,
+    marginRight: 15,
     borderBottomWidth: 1,
     borderBottomColor: "#dcdcdc"
   },
