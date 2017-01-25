@@ -25,23 +25,14 @@ export default class Article extends Component {
   }
 
   parseImageLink(text) {
-    var curIdx = 0;
-    var prevIdx = -1;
+    let textArray = text.split('src="');
+    let textResult = textArray.shift();
 
-    while (true) {
-      curIdx = text.indexOf('img', prevIdx + 1);
+    textArray.forEach((e) => {
+      textResult += 'src="' + baseURL + e;
+    });
 
-      if (curIdx === -1) {
-        break;
-      }
-
-      prevIdx = curIdx;
-      var first = text.substr(0, curIdx + 9);
-      var second = text.substr(curIdx + 9, text.length - curIdx);
-      text = first + baseURL + second;
-    }
-
-    return text;
+    return textResult;
   }
 
   render() {
@@ -52,7 +43,7 @@ export default class Article extends Component {
         </View>
 
         <View style={styles.dateContainer}>
-          <Text style={styles.date}>{(this.state.day < 10 ? "0" : "") + this.state.day}/{(this.state.month < 10 ? "0" : "") + this.state.month}/{this.state.year} por {this.props.authorName}</Text>
+          <Text style={styles.date}>{(this.state.day < 10 ? "0" : "") + this.state.day}/{(this.state.month < 10 ? "0" : "") + this.state.month}/{this.state.year} {this.props.authorName}</Text>
         </View>
 
         <View style={styles.bodyContainer}>
