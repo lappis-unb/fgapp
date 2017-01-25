@@ -50,7 +50,7 @@ export default class FgaNews extends Component {
               title={rowData.title}
               date={rowData.created_at}
               body={rowData.body}
-              summary={"This month in World War II, Hitler was killed."} />;
+            />;
   }
 
   getContent() {

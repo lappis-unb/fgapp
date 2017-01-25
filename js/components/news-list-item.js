@@ -12,7 +12,9 @@ import Dimensions from 'Dimensions';
 import { Card, Button } from 'react-native-material-design';
 
 const imageSize = parseInt(Dimensions.get('window').width / 5);
-const monthNames = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+const monthNames = ["janeiro", "fevereiro", "março", "abril",
+                    "maio", "junho", "julho", "agosto",
+                    "setembro", "outubro", "novembro", "dezembro"];
 
 export default class NewsListItem extends Component {
   constructor(props) {
@@ -36,21 +38,25 @@ export default class NewsListItem extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-          <Card>
-              <Card.Body>
-                <View style={styles.newsContainer}>
-                  <View style={styles.newsContent}>
-                    <Text style={styles.newsTitle}>{this.props.title}</Text>
-                    <Text style={styles.newsDate}>{this.state.day} de {this.state.month}</Text>
+      <TouchableOpacity onPress={() => this.goToArticle()}>
+        <View style={styles.container}>
+            <Card>
+                <Card.Body>
+                  <View style={styles.newsContainer}>
+                    <View style={styles.newsContent}>
+                      <Text style={styles.newsTitle}>{this.props.title}</Text>
+                      <Text style={styles.newsDate}>{this.state.day} de {this.state.month}</Text>
+                    </View>
+                    <View style={styles.newsImageContainer}>
+                      <Text>
+                        <Icon name="picture-o" style={styles.newsImagePlaceholder} />
+                      </Text>
+                    </View>
                   </View>
-                  <View style={styles.newsImageContainer}>
-                    <Icon name="picture-o" style={styles.newsImagePlaceholder} />
-                  </View>
-                </View>
-              </Card.Body>
-          </Card>
-      </View>
+                </Card.Body>
+            </Card>
+        </View>
+      </TouchableOpacity>
     );
   }
 }
@@ -61,7 +67,6 @@ const styles = StyleSheet.create({
   },
 
   newsContainer: {
-    flex: 5,
     justifyContent: 'center',
     flexDirection: 'row'
   },
