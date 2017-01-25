@@ -26,13 +26,13 @@ export default class FgaNews extends Component {
 
   componentDidMount() {
     if (this.props.articles.length === 0) {
-      this.props.fetchArticles(this.props.page);
+      this.props.fetchArticles(this.props.page, this.props.lastPage);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.page !== this.props.page) {
-      this.props.fetchArticles(nextProps.page);
+      this.props.fetchArticles(nextProps.page, this.props.lastPage);
     }
 
     this.setState({

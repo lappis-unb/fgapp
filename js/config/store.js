@@ -8,6 +8,7 @@ import {
 export const initialState = {
   articles: {
     page: 1,
+    lastPage: Infinity,
     data: []
   },
   professors: []

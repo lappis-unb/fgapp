@@ -32,13 +32,13 @@ export default class ProfessorsListItem extends Component {
 
   render() {
     var imageUrl = this.props.image === null ? defaultImageUrl : baseUrl + this.props.image.url;
-    console.log(imageUrl);
+
     return (
       <TouchableOpacity onPress={() => this.goToProfessor()}>
         <View style={styles.professorBlock}>
-            <Image style={styles.photo} source={{uri: imageUrl}} />
+          <Image style={styles.photo} source={{uri: imageUrl}} />
           <View style={{flex: 1}}>
-          <Text style={styles.professorName}>{this.state.name}</Text>
+            <Text style={styles.professorName}>{this.state.name}</Text>
           </View>
         </View>
       </TouchableOpacity>
