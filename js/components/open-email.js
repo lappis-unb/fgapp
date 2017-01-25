@@ -23,7 +23,7 @@ export default class OpenEmail extends Component {
       )
     }
     return (
-      <View>
+      <View style={styles.emailWrapper}>
         { emailLink }
       </View>
     );
@@ -32,9 +32,12 @@ export default class OpenEmail extends Component {
 
 const styles = StyleSheet.create({
   text: {
-    width: 200,
     fontWeight: 'bold',
     fontSize: 21,
     color: 'black'
   },
+
+  emailWrapper: {
+    flex: 1
+  }
 });
