@@ -7,3 +7,4 @@ jest.mock('Linking', () => {
     getInitialURL: jest.fn(),
   }
 })
+

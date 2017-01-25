@@ -48,10 +48,8 @@ exports[`test renders correctly 1`] = `
             Object {
               "color": "#333",
               "fontSize": 75,
-              "justifyContent": "center",
-              "padding": 15,
-              "textAlign": "center",
-              "width": 112.5,
+              "paddingLeft": 20,
+              "paddingRight": 20,
             },
             Object {
               "fontFamily": "FontAwesome",
@@ -104,10 +102,8 @@ exports[`test renders correctly 1`] = `
             Object {
               "color": "#333",
               "fontSize": 75,
-              "justifyContent": "center",
-              "padding": 15,
-              "textAlign": "center",
-              "width": 112.5,
+              "paddingLeft": 20,
+              "paddingRight": 20,
             },
             Object {
               "fontFamily": "FontAwesome",
@@ -160,10 +156,8 @@ exports[`test renders correctly 1`] = `
             Object {
               "color": "#333",
               "fontSize": 75,
-              "justifyContent": "center",
-              "padding": 15,
-              "textAlign": "center",
-              "width": 112.5,
+              "paddingLeft": 20,
+              "paddingRight": 20,
             },
             Object {
               "fontFamily": "FontAwesome",

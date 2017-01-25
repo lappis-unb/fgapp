@@ -3,12 +3,18 @@ import {
   View,
   Text,
   StyleSheet,
-  DrawerLayoutAndroid
+  DrawerLayoutAndroid,
 } from 'react-native';
 
 import MainMenu from './main-menu';
 import DrawerMenu from './drawer-menu';
 import AppRoutes from './app-routes';
+
+// TODO: Fix this workaround. The field `positions` is undefined in tests
+let drawerPos = undefined;
+if (DrawerLayoutAndroid.positions) {
+  drawerPos = DrawerLayoutAndroid.positions.Right;
+}
 
 export default class App extends Component {
   constructor(props) {
@@ -41,12 +47,12 @@ export default class App extends Component {
           <DrawerLayoutAndroid
             drawerWidth={300}
             ref={'DRAWER'}
-            drawerPosition={DrawerLayoutAndroid.positions.Right}
+            drawerPosition={drawerPos}
             onDrawerClose={() => { this.setState({drawerIsOpened: false}) }}
             onDrawerOpen={() => { this.setState({drawerIsOpened: true}) }}
-            renderNavigationView={() => <DrawerMenu />}>
-              {/* Main content goes here */}
-              <AppRoutes />
+            renderNavigationView={() => <DrawerMenu />}
+          >
+            <AppRoutes />
           </DrawerLayoutAndroid>
         </View>
 

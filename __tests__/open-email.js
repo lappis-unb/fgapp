@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import OpenEmail from '../components/open-email.js';
+import OpenEmail from '../js/components/open-email.js';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
