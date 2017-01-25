@@ -3,6 +3,7 @@ exports[`test renders correctly 1`] = `
   style={
     Object {
       "alignItems": "center",
+      "backgroundColor": "#eee",
       "flex": 1,
       "flexDirection": "row",
       "justifyContent": "center",
