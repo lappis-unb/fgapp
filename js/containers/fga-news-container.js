@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
           body: article.body,
           title: article.title,
           created_at: article.created_at,
-          authorName: article.author ? article.author.name : ""
+          authorName: article.setting.author_name
         }));
 
         const link = response.headers.link;
