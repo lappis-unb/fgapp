@@ -7,6 +7,10 @@ const articlesReducer = (state=initialState.articles, action) => {
       return update(state, {
         data: {
           $push: action.articles
+        },
+
+        lastPage: {
+          $set: action.lastPage
         }
       });
 
@@ -14,6 +18,13 @@ const articlesReducer = (state=initialState.articles, action) => {
       return update(state, {
         page: {
           $set: action.page
+        }
+      });
+
+    case 'UPDATE_ARTICLES_LAST_PAGE':
+      return update(state, {
+        lastPage: {
+          $set: action.lastPage
         }
       });
 

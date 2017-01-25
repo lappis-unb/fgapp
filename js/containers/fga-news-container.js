@@ -2,32 +2,45 @@ import { connect } from 'react-redux';
 import { ArticleService } from '../services';
 import FgaNews  from '../components/fga-news';
 
+
+
 const mapStateToProps = (state) => ({
   articles: state.articles.data,
-  page: state.articles.page
+  page: state.articles.page,
+  lastPage: state.articles.lastPage
 });
 
 const mapDispatchToProps = (dispatch) => ({
 
-  fetchArticles(page) {
-    ArticleService.get(
-      ArticleService.defaults.parentID,
-      page
-    )
-    .then(response => response.data)
-    .then((response) => {
-      const articles = response.articles.map(article => ({
-        id: article.id,
-        body: article.body,
-        title: article.title,
-        created_at: article.created_at
-      }));
+  fetchArticles(page, currentLastPage) {
+    if (page < currentLastPage) {
+      ArticleService.get(
+        ArticleService.defaults.parentID,
+        page
+      )
+      .then((response) => {
+        const articles = response.data.articles.map(article => ({
+          id: article.id,
+          body: article.body,
+          title: article.title,
+          created_at: article.created_at
+        }));
 
-      dispatch({
-        type: 'ADD_ARTICLES',
-        articles
+        const link = response.headers.link;
+        const lastPage = link.split(/\&/)
+                             .filter(page => page.match(/page=/))
+                             .map(page => page.replace(/page=/, ''))
+                             .map(value => parseInt(value))
+                             .sort()
+                             .reverse() [0];
+
+        dispatch({
+          type: 'ADD_ARTICLES',
+          articles,
+          lastPage
+        });
       });
-    });
+    }
   },
 
   updatePage(nextPage) {
@@ -36,6 +49,7 @@ const mapDispatchToProps = (dispatch) => ({
       page: nextPage
     })
   }
+
 });
 
 const FgaNewsContainer = connect(
