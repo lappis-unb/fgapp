@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default class Professor extends Component {
   render() {
     return (
-      <ScrollView style={styles.component}>
+      <View style={styles.component}>
         <View style={styles.header}>
           <View style={styles.headerWrapper}>
             <View style={styles.photoContainer}>
@@ -31,27 +31,29 @@ export default class Professor extends Component {
             </View>
           </View>
         </View>
-        <View style={styles.body}>
-          <View style={styles.descriptionContainer}>
-            <Text>
-              <Icon style={styles.descriptionIcon} name={'graduation-cap'}/>
-              <Text style={styles.description}>{this.props.description}</Text>
-            </Text>
+
+        <ScrollView>
+          <View style={styles.body}>
+            <View style={styles.descriptionContainer}>
+              <Text>
+                <Icon style={styles.descriptionIcon} name={'graduation-cap'}/>
+                <Text style={styles.description}>{this.props.description}</Text>
+              </Text>
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   component: {
-    backgroundColor: '#eeeeee',
+    flex: 1,
     backgroundColor: '#cdcdcd',
   },
   header: {
     justifyContent: 'center',
-    backgroundColor: '#cdcdcd',
     backgroundColor: '#eeeeee',
     minHeight: 150,
     maxHeight: 160,
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
     color: '#005263',
   },
   body: {
-    backgroundColor: '#cdcdcd',
+    flex: 1,
     paddingTop: 12,
     paddingLeft: 12,
     paddingRight: 12,
@@ -103,6 +105,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 12,
     borderRadius: 20,
+    marginBottom: 12
   },
   descriptionIcon: {
     color: '#005263',
