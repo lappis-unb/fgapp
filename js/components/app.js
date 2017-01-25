@@ -44,16 +44,19 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.mainContentContainer}>
+{/*
           <DrawerLayoutAndroid
             drawerWidth={300}
             ref={'DRAWER'}
             drawerPosition={drawerPos}
             onDrawerClose={() => { this.setState({drawerIsOpened: false}) }}
             onDrawerOpen={() => { this.setState({drawerIsOpened: true}) }}
-            renderNavigationView={() => <DrawerMenu />}
-          >
-            <AppRoutes />
+            renderNavigationView={() => <DrawerMenu />}>
           </DrawerLayoutAndroid>
+
+*/}
+        {/* Main content goes here */}
+              <AppRoutes />
         </View>
 
         <View style={styles.mainMenuContainer}>

@@ -22,6 +22,7 @@ export default class MainMenu extends Component {
           </TouchableOpacity>
         </View>
 
+{/*
         <View style={styles.eventsContainer}>
           <TouchableOpacity onPress={() => { Actions.Events({type: 'replace'}) }}>
             <Icon name="calendar" style={styles.iconStyle} />
@@ -31,6 +32,13 @@ export default class MainMenu extends Component {
         <View style={styles.moreContainer}>
           <TouchableOpacity onPress={() => { this.props.toggleDrawerMenu() }}>
             <Icon name="bars" style={styles.iconStyle} />
+          </TouchableOpacity>
+        </View>
+*/}
+
+        <View style={styles.professorsContainer}>
+          <TouchableOpacity onPress={() => { Actions.FgaProfessors({type: 'replace'}) }}>
+            <Icon name="users" style={styles.iconStyle} />
           </TouchableOpacity>
         </View>
 
@@ -43,13 +51,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#efefef',
-    borderTopWidth: 1
+    backgroundColor: '#009b37',
   },
 
   iconStyle: {
     fontSize: iconSize,
-    color: "#333",
+    color: 'white',
     paddingLeft: 20,
     paddingRight: 20,
   },
@@ -66,9 +73,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 
-  moreContainer: {
+  professorsContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
   }
+
 });
+
+{/*
+  moreContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+*/}
