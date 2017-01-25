@@ -5,7 +5,8 @@ import {
   Text,
   ListView,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  StyleSheet
 } from 'react-native';
 
 import { ArticleService } from '../services';
@@ -49,7 +50,8 @@ export default class FgaNews extends Component {
               title={rowData.title}
               date={rowData.created_at}
               body={rowData.body}
-              summary={"This month in World War II, Hitler was killed."} />;
+              authorName={rowData.authorName}
+            />;
   }
 
   getContent() {
@@ -72,7 +74,7 @@ export default class FgaNews extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+      <View style={styles.container}>
         {this.getContent()}
       </View>
     );
@@ -80,13 +82,16 @@ export default class FgaNews extends Component {
 }
 
 FgaNews.propTypes = {
-  articles: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      title: React.PropTypes.string,
-      created_at: React.PropTypes.string,
-      body: React.PropTypes.string
-    }).isRequired
-  ),
-
+  articles: React.PropTypes.array.isRequired,
   page: React.PropTypes.number.isRequired
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#eee',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row'
+  }
+});

@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#009b37',
+    backgroundColor: '#009b37'
   },
 
   iconStyle: {
