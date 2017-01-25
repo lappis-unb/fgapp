@@ -1,5 +1,10 @@
 exports[`test renders correctly 1`] = `
-<View>
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }>
   <Text
     accessible={true}
     allowFontScaling={true}
@@ -10,7 +15,6 @@ exports[`test renders correctly 1`] = `
         "color": "black",
         "fontSize": 21,
         "fontWeight": "bold",
-        "width": 200,
       }
     }>
     Não disponível.
