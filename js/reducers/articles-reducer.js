@@ -28,6 +28,13 @@ const articlesReducer = (state=initialState.articles, action) => {
         }
       });
 
+    case "SET_ARTICLES_ERROR":
+      return update(state,{
+        error:{
+          $set: action.error
+        }
+      });
+
     default:
       return state;
   }
