@@ -1,4 +1,4 @@
-import { axios } from '../config';
+import axios from '../config/axios';
 
 
 const PROFILE_ID = 35;

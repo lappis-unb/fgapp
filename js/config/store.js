@@ -1,9 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 
-import {
-  articlesReducer,
-  professorsReducer
-} from '../reducers';
+import articlesReducer from '../reducers/articles-reducer';
+import professorsReducer from '../reducers/professors-reducer';
 
 export const initialState = {
   articles: {

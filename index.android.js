@@ -12,7 +12,7 @@ import {
 import { Provider } from 'react-redux';
 import App from './js/components/app';
 
-import { store } from './js/config';
+import store from './js/config/store';
 
 export default class FGApp extends Component {
   render() {
