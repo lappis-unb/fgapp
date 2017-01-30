@@ -12,19 +12,15 @@ export default class OpenEmail extends Component {
   }
 
   render() {
-    let emailLink;
-    if(this.props.email === undefined){
-      emailLink = (
-        <Text numberOfLines={1} style={styles.text}>Não disponível.</Text>
-      )
-    }else{
-      emailLink = (
-        <Text numberOfLines={1} onPress={this.handleClick} style={styles.text}>{this.props.email}</Text>
-      )
-    }
     return (
       <View style={styles.emailWrapper}>
-        { emailLink }
+        <If condition={ this.props.email === undefined }>
+          <Text numberOfLines={1} style={styles.text}>Não disponível.</Text>
+        </If >
+
+        <If condition={ this.props.email !== undefined }>
+          <Text numberOfLines={1} onPress={this.handleClick} style={styles.text}>{this.props.email}</Text>
+        </If >
       </View>
     );
   }
