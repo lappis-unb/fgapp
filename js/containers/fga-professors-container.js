@@ -7,8 +7,13 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchProfessors: () => {
-    ProfessorsService.get()
+  fetchProfessors: (id) => {
+    dispatch({
+      type: 'ADD_PROFESSORS',
+      professors: []
+    });
+
+    ProfessorsService.get(id)
       .then((response) => response.data)
       .then((data) => {
         const professors = data.people.map(professor => ({
