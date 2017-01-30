@@ -10,6 +10,8 @@ import ProfessorsListItem from './professors-list-item';
 
 import ProfessorsService from '../services/professors-service';
 
+import communitiesId from '../config/professor-communities';
+
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 export default class FgaProfessors extends Component {
@@ -18,7 +20,7 @@ export default class FgaProfessors extends Component {
 
    this.state = {
       dataSource: ds.cloneWithRows(props.professors),
-      engineering: "35",
+      engineering: communitiesId.ALL,
     }
   }
 
@@ -50,12 +52,12 @@ export default class FgaProfessors extends Component {
                   this.props.fetchProfessors(course)
                   this.setState({engineering: course})
           }}>
-          <Picker.Item label="Todos" value="35" />
-          <Picker.Item label="Engenharia Aeroespacial" value="38" />
-          <Picker.Item label="Engenharia Automotiva" value="41" />
-          <Picker.Item label="Engenharia de Energia" value="39" />
-          <Picker.Item label="Engenharia Eletrônica" value="40" />
-          <Picker.Item label="Engenharia de Software" value="37" />
+          <Picker.Item label="Todos" value={communitiesId.ALL} />
+          <Picker.Item label="Engenharia Aeroespacial" value={communitiesId.AEROESPACIAL} />
+          <Picker.Item label="Engenharia Automotiva" value={communitiesId.AUTOMOTIVA} />
+          <Picker.Item label="Engenharia de Energia" value={communitiesId.ENERGIA} />
+          <Picker.Item label="Engenharia Eletrônica" value={communitiesId.ELETRONICA} />
+          <Picker.Item label="Engenharia de Software" value={communitiesId.SOFTWARE} />
         </Picker>
         <ListView
           dataSource={this.state.dataSource}
