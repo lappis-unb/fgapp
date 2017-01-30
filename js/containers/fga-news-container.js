@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { ArticleService } from '../services';
+import ArticleService from '../services/article-service';
 import FgaNews  from '../components/fga-news';
 
 const mapStateToProps = (state) => ({

@@ -7,7 +7,7 @@ import {
 
 import ProfessorsListItem from './professors-list-item';
 
-import { ProfessorsService } from '../services';
+import ProfessorsService from '../services/professors-service';
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 

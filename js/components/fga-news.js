@@ -9,7 +9,7 @@ import {
   StyleSheet
 } from 'react-native';
 
-import { ArticleService } from '../services';
+import ArticleService from '../services/article-service';
 import NewsListItem from './news-list-item';
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});

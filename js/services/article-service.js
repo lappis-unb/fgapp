@@ -1,4 +1,4 @@
-import { axios } from '../config';
+import axios from '../config/axios';
 
 const PARENT_ID = 46,
       LIMIT = 20,
