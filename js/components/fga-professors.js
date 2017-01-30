@@ -3,6 +3,7 @@ import {
   View,
   ListView,
   StyleSheet,
+  Picker
 } from 'react-native';
 
 import ProfessorsListItem from './professors-list-item';
@@ -16,7 +17,8 @@ export default class FgaProfessors extends Component {
     super(props);
 
    this.state = {
-      dataSource: ds.cloneWithRows(props.professors)
+      dataSource: ds.cloneWithRows(props.professors),
+      engineering: "35",
     }
   }
 
@@ -30,7 +32,7 @@ export default class FgaProfessors extends Component {
 
   componentDidMount() {
     if (this.props.professors.length === 0) {
-      this.props.fetchProfessors();
+      this.props.fetchProfessors(this.state.engineering);
     }
   }
 
@@ -43,6 +45,18 @@ export default class FgaProfessors extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
+        <Picker selectedValue={this.state.engineering}
+                onValueChange={(course) => {
+                  this.props.fetchProfessors(course)
+                  this.setState({engineering: course})
+          }}>
+          <Picker.Item label="Todos" value="35" />
+          <Picker.Item label="Engenharia Aeroespacial" value="38" />
+          <Picker.Item label="Engenharia Automotiva" value="41" />
+          <Picker.Item label="Engenharia de Energia" value="39" />
+          <Picker.Item label="Engenharia Eletrônica" value="40" />
+          <Picker.Item label="Engenharia de Software" value="37" />
+        </Picker>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={(rowData) => this.buildRowData(rowData) }
