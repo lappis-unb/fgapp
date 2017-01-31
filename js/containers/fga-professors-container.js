@@ -15,7 +15,8 @@ const mapStateToProps = (state) => ({
   clearListView: state.professors.clearListView,
   page: state.professors.page,
   lastPage: state.professors.lastPage,
-  course: state.professors.currentCourse
+  course: state.professors.currentCourse,
+  error: state.professors.error
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -42,7 +43,20 @@ const mapDispatchToProps = (dispatch) => ({
           currentCourse: id,
           clearListView: false
         });
+      })
+      .catch(error => {
+        dispatch({
+          type: 'SET_PROFESSORS_ERROR',
+          error: true
+        })
       });
+  },
+
+  professorsError(error){
+    dispatch({
+      type: 'SET_PROFESSORS_ERROR',
+      error
+    })
   }
 });
 
