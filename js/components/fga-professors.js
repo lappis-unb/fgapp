@@ -12,16 +12,39 @@ import ProfessorsService from '../services/professors-service';
 
 import communitiesId from '../config/professor-communities';
 
-const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id != r2.id});
 
 export default class FgaProfessors extends Component {
   constructor(props) {
     super(props);
 
-   this.state = {
-      dataSource: ds.cloneWithRows(props.professors),
-      engineering: communitiesId.ALL,
+    this.state = {
+      dataSource: ds.cloneWithRows(this.professorsToDisplay(props)),
     }
+
+    this.changeCourse = this.changeCourse.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.professors.length === 0) {
+      this.props.fetchProfessors(this.props.course);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(this.professorsToDisplay(nextProps))
+    });
+  }
+
+  professorsToDisplay(props) {
+    let professors = [];
+
+    if (!props.clearListView) {
+      professors = props.professors;
+    }
+
+    return professors;
   }
 
   buildRowData(rowData) {
@@ -32,26 +55,18 @@ export default class FgaProfessors extends Component {
            />
   }
 
-  componentDidMount() {
-    if (this.props.professors.length === 0) {
-      this.props.fetchProfessors(this.state.engineering);
-    }
-  }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      dataSource: ds.cloneWithRows(nextProps.professors)
-    });
+  changeCourse(course) {
+    this.props.fetchProfessors(course);
   }
 
   render() {
     return (
       <View style={{flex: 1}}>
-        <Picker selectedValue={this.state.engineering}
-                onValueChange={(course) => {
-                  this.props.fetchProfessors(course)
-                  this.setState({engineering: course})
-          }}>
+        <Picker
+          selectedValue={this.props.course}
+          onValueChange={this.changeCourse}
+        >
           <Picker.Item label="Todos" value={communitiesId.ALL} />
           <Picker.Item label="Engenharia Aeroespacial" value={communitiesId.AEROESPACIAL} />
           <Picker.Item label="Engenharia Automotiva" value={communitiesId.AUTOMOTIVA} />
