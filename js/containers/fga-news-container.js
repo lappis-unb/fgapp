@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import ArticleService from '../services/article-service';
 import FgaNews  from '../components/fga-news';
+import { getLastPageFromHeaderLink } from '../services/util';
 
 const mapStateToProps = (state) => ({
   articles: state.articles.data,
@@ -12,41 +13,37 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 
   fetchArticles(page, currentLastPage) {
-    if (page < currentLastPage) {
-      ArticleService.get(
-        ArticleService.defaults.parentID,
-        page
-      )
-      .then((response) => {
-        const articles = response.data.articles.map(article => ({
-          id: article.id,
-          body: article.body,
-          title: article.title,
-          created_at: article.created_at,
-          authorName: article.setting ? "por " + article.setting.author_name : ""
-        }));
-
-        const link = response.headers.link;
-        const lastPage = link.split(/\&/)
-                             .filter(page => page.match(/page=/))
-                             .map(page => page.replace(/page=/, ''))
-                             .map(value => parseInt(value))
-                             .sort()
-                             .reverse() [0];
-
-        dispatch({
-          type: 'ADD_ARTICLES',
-          articles,
-          lastPage
-        });
-      })
-      .catch(error => {
-        dispatch({
-          type: 'SET_ARTICLES_ERROR',
-          error: true
-        })
-      })
+    if (page >= currentLastPage) {
+      return;
     }
+
+    ArticleService.get(
+      ArticleService.defaults.parentID,
+      page
+    )
+    .then((response) => {
+      const articles = response.data.articles.map(article => ({
+        id: article.id,
+        body: article.body,
+        title: article.title,
+        created_at: article.created_at,
+        authorName: article.setting ? "por " + article.setting.author_name : ""
+      }));
+
+      const lastPage = getLastPageFromHeaderLink(response.headers.link);
+
+      dispatch({
+        type: 'ADD_ARTICLES',
+        articles,
+        lastPage
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: 'SET_ARTICLES_ERROR',
+        error: true
+      })
+    });
   },
 
   updatePage(nextPage) {
