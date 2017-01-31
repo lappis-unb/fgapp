@@ -20,8 +20,9 @@ export default class FgaProfessors extends Component {
 
    this.state = {
       dataSource: ds.cloneWithRows(props.professors),
-      engineering: communitiesId.ALL,
     }
+
+    this.changeCourse = this.changeCourse.bind(this);
   }
 
   buildRowData(rowData) {
@@ -34,7 +35,7 @@ export default class FgaProfessors extends Component {
 
   componentDidMount() {
     if (this.props.professors.length === 0) {
-      this.props.fetchProfessors(this.state.engineering);
+      this.props.fetchProfessors(this.props.course);
     }
   }
 
@@ -44,14 +45,17 @@ export default class FgaProfessors extends Component {
     });
   }
 
+  changeCourse(course) {
+    this.props.fetchProfessors(course);
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
-        <Picker selectedValue={this.state.engineering}
-                onValueChange={(course) => {
-                  this.props.fetchProfessors(course)
-                  this.setState({engineering: course})
-          }}>
+        <Picker
+          selectedValue={this.props.course}
+          onValueChange={this.changeCourse}
+        >
           <Picker.Item label="Todos" value={communitiesId.ALL} />
           <Picker.Item label="Engenharia Aeroespacial" value={communitiesId.AEROESPACIAL} />
           <Picker.Item label="Engenharia Automotiva" value={communitiesId.AUTOMOTIVA} />
