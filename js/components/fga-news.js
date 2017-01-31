@@ -60,42 +60,37 @@ export default class FgaNews extends Component {
     this.props.fetchArticles(this.props.page, this.props.lastPage);
   }
 
-  getContent() {
-    let content = '';
-    if (this.props.error == true) {
-      content =
-      <View style={styles.error}>
-        <Text style={styles.textError}> Ocorreu um erro
-        durante o carregamento dos dados!</Text>
-          <Button
-          onPress={() => {this.updatePageError()}}
-          title="Tentar Novamente"
-          color="#21ba57"
-          accessibilityLabel="Recarregar Dados"
-          />
-      </View>
-
-    }
-    else if (this.props.articles.length === 0) {
-      content = <ActivityIndicator size={60} color="#21ba57" />;
-    }
-    else {
-      content = <ListView
-                  dataSource={this.state.dataSource}
-                  renderRow={(rowData) => this.buildRowData(rowData)}
-                  enableEmptySections={true}
-                  initialListSize={20}
-                  onEndReached={this.fetchMoreArticles}
-                />
-    }
-
-    return content;
-  }
-
   render() {
     return (
       <View style={styles.container}>
-        {this.getContent()}
+        <Choose>
+          <When condition={ this.props.error }>
+						<View style={styles.error}>
+							<Text style={styles.textError}> Ocorreu um erro
+							durante o carregamento dos dados!</Text>
+								<Button
+									onPress={() => {this.updatePageError()}}
+									title="Tentar Novamente"
+									color="#21ba57"
+									accessibilityLabel="Recarregar Dados"
+								/>
+						</View>
+          </When>
+
+          <When condition={ this.props.articles.length === 0 }>
+            <ActivityIndicator size={60} color="#21ba57" />
+          </When>
+
+          <When condition={ this.props.articles.length > 0 }>
+            <ListView
+              dataSource={this.state.dataSource}
+              renderRow={(rowData) => this.buildRowData(rowData)}
+              enableEmptySections={true}
+              initialListSize={20}
+              onEndReached={this.fetchMoreArticles}
+            />
+          </When>
+        </Choose>
       </View>
     );
   }
