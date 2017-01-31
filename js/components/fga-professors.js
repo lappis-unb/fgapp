@@ -12,25 +12,17 @@ import ProfessorsService from '../services/professors-service';
 
 import communitiesId from '../config/professor-communities';
 
-const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id != r2.id});
 
 export default class FgaProfessors extends Component {
   constructor(props) {
     super(props);
 
-   this.state = {
-      dataSource: ds.cloneWithRows(props.professors),
+    this.state = {
+      dataSource: ds.cloneWithRows(this.professorsToDisplay(props)),
     }
 
     this.changeCourse = this.changeCourse.bind(this);
-  }
-
-  buildRowData(rowData) {
-    return <ProfessorsListItem
-              name={rowData.name}
-              image={rowData.image}
-              additional_data={rowData.additional_data}
-           />
   }
 
   componentDidMount() {
@@ -41,9 +33,28 @@ export default class FgaProfessors extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      dataSource: ds.cloneWithRows(nextProps.professors)
+      dataSource: this.state.dataSource.cloneWithRows(this.professorsToDisplay(nextProps))
     });
   }
+
+  professorsToDisplay(props) {
+    let professors = [];
+
+    if (!props.clearListView) {
+      professors = props.professors;
+    }
+
+    return professors;
+  }
+
+  buildRowData(rowData) {
+    return <ProfessorsListItem
+              name={rowData.name}
+              image={rowData.image}
+              additional_data={rowData.additional_data}
+           />
+  }
+
 
   changeCourse(course) {
     this.props.fetchProfessors(course);

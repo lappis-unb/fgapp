@@ -1,15 +1,26 @@
 import update from 'immutability-helper'; // See: https://github.com/kolodny/immutability-helper
 import { initialState } from '../config/store';
 
+import { ALL } from '../config/professor-communities';
+
+// Dont add already added professors and
+// update course_id if it is ALL
 const filterProfessorsToAdd = (currentProfessors=[], professorsToAdd=[]) => {
-  let professors = [];
+  let professors = currentProfessors.concat(professorsToAdd);
 
-  professors = professorsToAdd.filter(professor => {
-    let alreadyHasProfessor = currentProfessors.find(current => current.id === professor.id);
+  professors = professors.reduce((accumulator, professor) => {
+    let index = accumulator.findIndex(item => item.id === professor.id);
 
-    // Add professor if not already has its data
-    return !alreadyHasProfessor;
-  });
+    if (index === -1) {
+      // Just add if we dont have it
+      accumulator.push(professor);
+    } else if(index !== -1 && professor.course_id !== ALL) {
+      // Update course_id if it is actualy ALL
+      accumulator[index].course_id = professor.course_id;
+    }
+
+    return accumulator;
+  }, []);
 
   return professors;
 }
@@ -48,10 +59,13 @@ const professorsReducer = (state=initialState.professors, action) => {
     case 'ADD_PROFESSORS':
       return update(state, {
         data: {
-          $push: filterProfessorsToAdd(state.data, action.professors)
+          $set: filterProfessorsToAdd(state.data, action.professors)
         },
         currentCourse: {
           $set: action.currentCourse
+        },
+        clearListView: {
+          $set: action.clearListView
         }
       });
 

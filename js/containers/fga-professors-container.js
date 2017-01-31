@@ -21,7 +21,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchProfessors: (id) => {
     dispatch({
-      type: 'CLEAR_PROFESSORS_LIST_VIEW'
+      type: 'SET_CLEAR_PROFESSORS_LIST_VIEW',
+      clearListView: true
     });
 
     ProfessorsService.get(id)
@@ -38,7 +39,8 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch({
           type: 'ADD_PROFESSORS',
           professors,
-          currentCourse: id
+          currentCourse: id,
+          clearListView: false
         });
       });
   }
