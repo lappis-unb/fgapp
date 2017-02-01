@@ -19,26 +19,23 @@ export default class Professor extends Component {
             <View style={styles.photoContainer}>
               <Image style={styles.photo} source={{uri: this.props.imageUrl}} />
             </View>
-
             <View style={styles.additionalData}>
               <View style={styles.nameContainer}>
                 <Text style={styles.name}>{this.props.name}</Text>
               </View>
-              <View style={styles.emailContainer}>
-                <Icon style={styles.emailIcon} name={'envelope'}/>
-                <OpenEmail email={this.props.email} />
-              </View>
             </View>
           </View>
         </View>
-
+        <View style={styles.emailInfo}>
+          <View style={styles.emailContainer}>
+            <OpenEmail email={this.props.email} />
+          </View>
+        </View>
         <ScrollView>
           <View style={styles.body}>
             <View style={styles.descriptionContainer}>
-              <Text>
                 <Icon style={styles.descriptionIcon} name={'graduation-cap'}/>
                 <Text style={styles.description}>{this.props.description}</Text>
-              </Text>
             </View>
           </View>
         </ScrollView>
@@ -54,7 +51,7 @@ const styles = StyleSheet.create({
   },
   header: {
     justifyContent: 'center',
-    backgroundColor: '#eeeeee',
+    backgroundColor: '#1ca95b',
     minHeight: 150,
     maxHeight: 160,
   },
@@ -73,43 +70,50 @@ const styles = StyleSheet.create({
   },
   additionalData: {
     flexDirection: 'column',
-    flex: 2
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   nameContainer: {
-    justifyContent: 'center',
-    padding: 5,
+    padding: 5
   },
   name: {
-    color: '#005263',
+    color: 'white',
     fontSize: 28,
     fontWeight: 'bold',
-    textAlign: 'center'
+  },
+  emailInfo: {
+    backgroundColor: '#1ca95b',
+    marginTop: 10,
+    marginLeft: 5,
+    marginRight: 5
   },
   emailContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    padding: 5
   },
   emailIcon: {
     fontSize: 21,
     marginRight: 10,
-    color: '#005263',
+    color: 'white',
   },
   body: {
     flex: 1,
     paddingTop: 12,
-    paddingLeft: 12,
-    paddingRight: 12,
+    paddingLeft: 5,
+    paddingRight: 5,
   },
   descriptionContainer: {
     backgroundColor: 'white',
     padding: 12,
-    borderRadius: 20,
     marginBottom: 12
   },
   descriptionIcon: {
     color: '#005263',
-    fontSize: 36,
+    fontSize: 21,
+    alignSelf: 'flex-end'
   },
   description: {
     color: '#444',
