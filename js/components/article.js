@@ -17,22 +17,26 @@ export default class Article extends Component {
     var date = new Date(this.props.date);
 
     this.state = {
-      parsedBody: this.parseImageLink(this.props.body),
+      parsedBody: this.parseHtml(this.props.body),
       day: date.getDate(),
       month: date.getMonth() + 1,
       year: date.getFullYear()
     }
   }
 
+  parseHtml(text) {
+    text = this.parseImageLink(text);
+    return this.parseCustomCss(text);
+  }
+
   parseImageLink(text) {
-    let textArray = text.split('src="');
-    let textResult = textArray.shift();
+    let htmlSrcRegex = /src="/gim;
+    return text.replace(htmlSrcRegex, 'src="' + baseURL);
+  }
 
-    textArray.forEach((e) => {
-      textResult += 'src="' + baseURL + e;
-    });
-
-    return textResult;
+  parseCustomCss(text) {
+    let htmlStyleRegex = /style="[^"]*"/gim;
+    return text.replace(htmlStyleRegex, "");
   }
 
   render() {
