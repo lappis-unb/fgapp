@@ -9,15 +9,14 @@ import {
   ActivityIndicator
 } from 'react-native';
 
+import FgaProfessorsContainer from '../containers/fga-professors-container';
 import ProfessorsListItem from './professors-list-item';
-
 import ProfessorsService from '../services/professors-service';
-
 import communitiesId from '../config/professor-communities';
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id != r2.id});
 
-export default class FgaProfessors extends Component {
+class FgaProfessors extends Component {
   constructor(props) {
     super(props);
 
@@ -111,6 +110,9 @@ export default class FgaProfessors extends Component {
     );
   }
 }
+
+export default FgaProfessorsContainer (FgaProfessors);
+
 const styles = StyleSheet.create({
   activity: {
     flex: 1,

@@ -10,12 +10,13 @@ import {
   Button
 } from 'react-native';
 
+import FgaNewsContainer from '../containers/fga-news-container';
 import ArticleService from '../services/article-service';
 import NewsListItem from './news-list-item';
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-export default class FgaNews extends Component {
+class FgaNews extends Component {
   constructor(props) {
     super(props);
 
@@ -100,6 +101,8 @@ FgaNews.propTypes = {
   articles: React.PropTypes.array.isRequired,
   page: React.PropTypes.number.isRequired
 }
+
+export default FgaNewsContainer (FgaNews);
 
 const styles = StyleSheet.create({
   container: {

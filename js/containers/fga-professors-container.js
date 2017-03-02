@@ -60,9 +60,7 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-const FgaProfessorsContainer = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-) (FgaProfessors);
-
-export default FgaProfessorsContainer;
+);

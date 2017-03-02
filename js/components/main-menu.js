@@ -9,10 +9,11 @@ import {
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Dimensions from 'Dimensions';
+import MainMenuContainer from '../containers/main-menu-container';
 
 const iconSize = parseInt(Dimensions.get('window').width / 10);
 
-export default class MainMenu extends Component {
+class MainMenu extends Component {
   changeScene(sceneKey) {
     Actions[sceneKey] ({type: 'replace'});
     this.props.updateTitle(sceneKey);
@@ -54,6 +55,8 @@ export default class MainMenu extends Component {
     );
   }
 }
+
+export default MainMenuContainer (MainMenu);
 
 const styles = StyleSheet.create({
   container: {

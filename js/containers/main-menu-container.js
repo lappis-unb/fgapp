@@ -1,22 +1,25 @@
 import { connect } from 'react-redux';
-import MainMenu from '../components/main-menu'
 
-const mapStateToProps = (state) => ({
-  actualPage: state.pages.actualPage
-});
+const mapStateToProps = (state) => {
 
-const mapDispatchToProps = (dispatch) => ({
-  updateTitle(title){
-    dispatch(
-      {type: 'UPDATE_PAGE',
-       title}
-    )
+  return {
+    actualPage: state.pages.actualPage
   }
-});
+};
 
-const MainMenuContainer = connect(
+const mapDispatchToProps = (dispatch) => {
+
+  return {
+    updateTitle(title){
+      dispatch(
+        {type: 'UPDATE_PAGE',
+        title}
+      )
+    }
+  }
+};
+
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-) (MainMenu);
-
-export default MainMenuContainer;
+);
