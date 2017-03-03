@@ -21,13 +21,6 @@ const articlesReducer = (state=initialState.articles, action) => {
         }
       });
 
-    case 'UPDATE_ARTICLES_LAST_PAGE':
-      return update(state, {
-        lastPage: {
-          $set: action.lastPage
-        }
-      });
-
     case "SET_ARTICLES_ERROR":
       return update(state,{
         error:{

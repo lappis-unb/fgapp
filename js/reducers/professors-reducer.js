@@ -35,27 +35,6 @@ const professorsReducer = (state=initialState.professors, action) => {
         }
       });
 
-    case 'SET_PROFESSORS_PAGE':
-      return update(state, {
-        page: {
-          $set: action.page
-        }
-      });
-
-    case 'SET_PROFESSORS_LAST_PAGE':
-      return update(state, {
-        lastPage: {
-          $set: action.lastPage
-        }
-      });
-
-    case 'SET_PROFESSORS_CURRENT_COURSE':
-      return update(state, {
-        currentCourse: {
-          $set: action.course
-        }
-      });
-
     case 'ADD_PROFESSORS':
       return update(state, {
         data: {
