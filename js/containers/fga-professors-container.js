@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchProfessors(courseId, page, lastPage) {
-    if ( page >= lastPage ) {
+    if ( page > lastPage ) {
       return;
     }
 

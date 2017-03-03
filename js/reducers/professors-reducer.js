@@ -19,6 +19,19 @@ const filterProfessorsToAdd = (state, professorsToAdd=[]) => {
   return professors;
 }
 
+// Fix for when the last page is reached,
+// the header stops sending the last page, so we keep our
+// current stoted last page
+const verifyLastPageChanged = (state, nextLastPage) => {
+  const currentLastPage = state[state.currentCourse].lastPage;
+  let lastPage = currentLastPage;
+
+  if (currentLastPage === Infinity || nextLastPage > currentLastPage) {
+    lastPage = nextLastPage;
+  }
+
+  return lastPage;
+}
 
 const professorsReducer = (state=initialState.professors, action) => {
   switch(action.type) {
@@ -34,16 +47,16 @@ const professorsReducer = (state=initialState.professors, action) => {
         [action.course]: {
           data: {
             $set: filterProfessorsToAdd(state, action.professors)
-          }
+          },
+          page: {
+            $set: action.page
+          },
+          lastPage: {
+            $set: verifyLastPageChanged(state, action.lastPage)
+          },
         },
         currentCourse: {
           $set: action.course
-        },
-        page: {
-          $set: action.page
-        },
-        lastPage: {
-          $set: action.lastPage
         },
         clearListView: {
           $set: action.clearListView
