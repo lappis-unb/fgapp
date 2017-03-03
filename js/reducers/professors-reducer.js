@@ -1,5 +1,23 @@
-import update from 'immutability-helper'; // See: https://github.com/kolodny/immutability-helper
+import update from 'immutability-helper'; // Doc on: https://github.com/kolodny/immutability-helper
 import initialState from '../config/initial-state';
+
+const filterProfessorsToAdd = (state, professorsToAdd=[]) => {
+  const currentProfessors = state[state.currentCourse].data;
+  let professors = currentProfessors.concat(professorsToAdd);
+
+  // Removes repeated professors
+  professors = professors.reduce((accumulator, professor) => {
+    const index = accumulator.findIndex(p => p.id === professor.id);
+
+    if (index === -1) {
+      accumulator.push(professor);
+    }
+
+    return accumulator;
+  }, []);
+
+  return professors;
+}
 
 
 const professorsReducer = (state=initialState.professors, action) => {
@@ -15,7 +33,7 @@ const professorsReducer = (state=initialState.professors, action) => {
       return update(state, {
         [action.course]: {
           data: {
-            $push: action.professors
+            $set: filterProfessorsToAdd(state, action.professors)
           }
         },
         currentCourse: {
@@ -30,6 +48,13 @@ const professorsReducer = (state=initialState.professors, action) => {
       return update(state,{
         error: {
           $set: action.error
+        }
+      });
+
+    case 'CHANGE_CURRENT_COURSE':
+      return update(state, {
+        currentCourse: {
+          $set: action.courseId
         }
       });
 

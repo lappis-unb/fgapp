@@ -7,15 +7,6 @@ import { ALL } from '../config/professor-communities';
 const mapStateToProps = (state) => {
   const selectedCourse = state.professors[state.professors.currentCourse];
 
-  console.info(
-    `
-      Current Course: ${state.professors.currentCourse}
-      Number of professors: ${selectedCourse.data.length}
-      Actual page: ${selectedCourse.page}
-      Last page: ${selectedCourse.lastPage}
-    `
-  );
-
   return {
     professors: selectedCourse.data,
     page: selectedCourse.page,
@@ -27,18 +18,17 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchProfessors: (courseId) => {
-    dispatch({
-      type: 'SET_CLEAR_PROFESSORS_LIST_VIEW',
-      clearListView: true
-    });
+  fetchProfessors(courseId, page, lastPage) {
+    if ( page >= lastPage ) {
+      return;
+    }
 
     ProfessorsService.get(courseId)
       .then((response) => response.data)
       .then((data) => {
         const professors = data.people.map(professor => {
           return {
-            id: professor.id,
+            id: `${courseId}-${professor.id}`,
             name: professor.name,
             image: professor.image,
             additional_data: professor.additional_data,
@@ -66,6 +56,13 @@ const mapDispatchToProps = (dispatch) => ({
       type: 'SET_PROFESSORS_ERROR',
       error
     })
+  },
+
+  changeCourse(courseId) {
+    dispatch({
+      type: 'CHANGE_CURRENT_COURSE',
+      courseId
+    });
   }
 });
 

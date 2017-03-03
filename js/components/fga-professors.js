@@ -21,37 +21,34 @@ class FgaProfessors extends Component {
     super(props);
 
     this.state = {
-      dataSource: ds.cloneWithRows(this.professorsToDisplay(props)),
+      dataSource: ds.cloneWithRows(props.professors),
     }
 
     this.changeCourse = this.changeCourse.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.professors.length === 0) {
-      this.props.fetchProfessors(this.props.course);
-    }
+    this.verifyInitialFetchProfessors(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
+    this.verifyInitialFetchProfessors(nextProps);
+
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this.professorsToDisplay(nextProps))
+      dataSource: this.state.dataSource.cloneWithRows(nextProps.professors)
     });
   }
 
-  professorsToDisplay(props) {
-    let professors = [];
-
-    if (!props.clearListView) {
-      professors = props.professors;
+  verifyInitialFetchProfessors(props) {
+    if (props.professors.length === 0) {
+      this.props.fetchProfessors(props.course, props.page, props.lastPage);
     }
-
-    return professors;
   }
 
   buildRowData(rowData) {
     return (
       <ProfessorsListItem
+        key={rowData.id}
         name={rowData.name}
         image={rowData.image}
         additional_data={rowData.additional_data}
@@ -61,11 +58,15 @@ class FgaProfessors extends Component {
 
   updatePageError() {
     this.props.professorsError(false);
-    this.props.fetchProfessors(this.props.course);
+    this.props.fetchProfessors(this.props.course, this.props.page, this.props.lastPage);
   }
 
   changeCourse(course) {
-    this.props.fetchProfessors(course);
+    // Clear ListView so that there is professores with the wrong avatar
+    this.setState({
+      dataSource: ds.cloneWithRows([])
+    });
+    this.props.changeCourse(course);
   }
 
   render() {
