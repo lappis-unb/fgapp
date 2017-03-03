@@ -69,6 +69,13 @@ const professorsReducer = (state=initialState.professors, action) => {
         }
       });
 
+    case 'SET_PROFESSORS_ERROR':
+      return update(state,{
+        error: {
+          $set: action.error
+        }
+      });
+
     default:
       return state;
   }
