@@ -37,11 +37,13 @@ const professorsReducer = (state=initialState.professors, action) => {
 
     case 'ADD_PROFESSORS':
       return update(state, {
-        data: {
-          $set: filterProfessorsToAdd(state.data, action.professors)
+        [action.course]: {
+          data: {
+            $push: action.professors
+          }
         },
         currentCourse: {
-          $set: action.currentCourse
+          $set: action.course
         },
         clearListView: {
           $set: action.clearListView

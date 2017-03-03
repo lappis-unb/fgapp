@@ -4,43 +4,52 @@ import FgaProfessors from '../components/fga-professors';
 
 import { ALL } from '../config/professor-communities';
 
-const mapStateToProps = (state) => ({
-  professors: state.professors.data.filter(professor => {
-    const displayAll = state.professors.currentCourse === ALL;
-    const professorInCurrentCourse = professor.course_id === state.professors.currentCourse;
+const mapStateToProps = (state) => {
+  const selectedCourse = state.professors[state.professors.currentCourse];
 
-    return displayAll || professorInCurrentCourse;
-  }),
+  console.info(
+    `
+      Current Course: ${state.professors.currentCourse}
+      Number of professors: ${selectedCourse.data.length}
+      Actual page: ${selectedCourse.page}
+      Last page: ${selectedCourse.lastPage}
+    `
+  );
 
-  clearListView: state.professors.clearListView,
-  page: state.professors.page,
-  lastPage: state.professors.lastPage,
-  course: state.professors.currentCourse,
-  error: state.professors.error
-});
+  return {
+    professors: selectedCourse.data,
+    page: selectedCourse.page,
+    lastPage: selectedCourse.lastPage,
+    clearListView: state.professors.clearListView,
+    course: state.professors.currentCourse,
+    error: state.professors.error
+  }
+};
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchProfessors: (id) => {
+  fetchProfessors: (courseId) => {
     dispatch({
       type: 'SET_CLEAR_PROFESSORS_LIST_VIEW',
       clearListView: true
     });
 
-    ProfessorsService.get(id)
+    ProfessorsService.get(courseId)
       .then((response) => response.data)
       .then((data) => {
-        const professors = data.people.map(professor => ({
-          id: professor.id,
-          name: professor.name,
-          image: professor.image,
-          additional_data: professor.additional_data,
-          course_id: id
-        }));
+        const professors = data.people.map(professor => {
+          return {
+            id: professor.id,
+            name: professor.name,
+            image: professor.image,
+            additional_data: professor.additional_data,
+            course_id: courseId
+          }
+        });
 
         dispatch({
           type: 'ADD_PROFESSORS',
           professors,
-          currentCourse: id,
+          course: courseId,
           clearListView: false
         });
       })

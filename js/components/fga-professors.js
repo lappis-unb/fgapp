@@ -50,11 +50,13 @@ class FgaProfessors extends Component {
   }
 
   buildRowData(rowData) {
-    return <ProfessorsListItem
-              name={rowData.name}
-              image={rowData.image}
-              additional_data={rowData.additional_data}
-           />
+    return (
+      <ProfessorsListItem
+        name={rowData.name}
+        image={rowData.image}
+        additional_data={rowData.additional_data}
+      />
+    );
   }
 
   updatePageError() {
@@ -70,7 +72,7 @@ class FgaProfessors extends Component {
     return (
       <View style={{flex: 1}}>
         <Choose>
-          <When condition={this.props.error}>
+          <When condition={ this.props.error }>
             <View style={styles.error}>
               <Text style={styles.textError}> Ocorreu um erro
               durante o carregamento dos dados!</Text>
@@ -82,8 +84,9 @@ class FgaProfessors extends Component {
                 />
             </View>
           </When>
+
           <When condition={ this.props.professors.length === 0 }>
-            <ActivityIndicator  size={60} color="#21ba57" style={styles.activity} />
+            <ActivityIndicator size={60} color="#21ba57" style={styles.activity} />
           </When>
 
           <When condition={ this.props.professors.length > 0 }>
