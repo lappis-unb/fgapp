@@ -23,31 +23,24 @@ const mapDispatchToProps = (dispatch) => ({
       return;
     }
 
-    ProfessorsService.get(courseId)
-      .then((response) => response.data)
-      .then((data) => {
-        const professors = data.people.map(professor => {
-          return {
-            id: `${courseId}-${professor.id}`,
-            name: professor.name,
-            image: professor.image,
-            additional_data: professor.additional_data,
-            course_id: courseId
-          }
-        });
-
+    ProfessorsService.get(courseId, page)
+      .then(data => {
         dispatch({
           type: 'ADD_PROFESSORS',
-          professors,
+          professors: data.professors,
           course: courseId,
+          page,
+          lastPage: data.lastPage,
           clearListView: false
         });
       })
       .catch(error => {
+        console.error(error);
+
         dispatch({
           type: 'SET_PROFESSORS_ERROR',
           error: true
-        })
+        });
       });
   },
 

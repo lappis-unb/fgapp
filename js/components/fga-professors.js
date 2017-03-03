@@ -25,6 +25,7 @@ class FgaProfessors extends Component {
     }
 
     this.changeCourse = this.changeCourse.bind(this);
+    this.fetchMoreProfessors = this.fetchMoreProfessors.bind(this);
   }
 
   componentDidMount() {
@@ -69,6 +70,14 @@ class FgaProfessors extends Component {
     this.props.changeCourse(course);
   }
 
+  fetchMoreProfessors() {
+    this.props.fetchProfessors(
+      this.props.course,
+      this.props.page + 1,
+      this.props.lastPage
+    );
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
@@ -107,6 +116,8 @@ class FgaProfessors extends Component {
               dataSource={this.state.dataSource}
               renderRow={(rowData) => this.buildRowData(rowData) }
               enableEmptySections={true}
+              initialListSize={20}
+              onEndReached={this.fetchMoreProfessors}
             />
           </When>
         </Choose>

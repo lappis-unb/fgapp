@@ -39,6 +39,12 @@ const professorsReducer = (state=initialState.professors, action) => {
         currentCourse: {
           $set: action.course
         },
+        page: {
+          $set: action.page
+        },
+        lastPage: {
+          $set: action.lastPage
+        },
         clearListView: {
           $set: action.clearListView
         }

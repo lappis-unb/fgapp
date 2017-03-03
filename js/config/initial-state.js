@@ -7,11 +7,17 @@ import {
   SOFTWARE
 } from './professor-communities';
 
+export const COMMON_DEFAULTS = {
+  page: 1,
+  lastPage: Infinity,
+  data: []
+}
+
 export default {
   articles: {
-    page: 1,
-    lastPage: Infinity,
-    data: [],
+    page: COMMON_DEFAULTS.page,
+    lastPage: COMMON_DEFAULTS.lastPage,
+    data: COMMON_DEFAULTS.data,
     error: false
   },
 
@@ -21,39 +27,39 @@ export default {
     error: false,
 
     [ALL]: {
-      data: [],
-      page: 1,
-      lastPage: Infinity
+      data: COMMON_DEFAULTS.data,
+      page: COMMON_DEFAULTS.page,
+      lastPage: COMMON_DEFAULTS.lastPage
     },
 
     [AEROESPACIAL]: {
-      data: [],
-      page: 1,
-      lastPage: Infinity
+      data: COMMON_DEFAULTS.data,
+      page: COMMON_DEFAULTS.page,
+      lastPage: COMMON_DEFAULTS.lastPage
     },
 
     [AUTOMOTIVA]: {
-      data: [],
-      page: 1,
-      lastPage: Infinity
+      data: COMMON_DEFAULTS.data,
+      page: COMMON_DEFAULTS.page,
+      lastPage: COMMON_DEFAULTS.lastPage
     },
 
     [ELETRONICA]: {
-      data: [],
-      page: 1,
-      lastPage: Infinity
+      data: COMMON_DEFAULTS.data,
+      page: COMMON_DEFAULTS.page,
+      lastPage: COMMON_DEFAULTS.lastPage
     },
 
     [ENERGIA]: {
-      data: [],
-      page: 1,
-      lastPage: Infinity
+      data: COMMON_DEFAULTS.data,
+      page: COMMON_DEFAULTS.page,
+      lastPage: COMMON_DEFAULTS.lastPage
     },
 
     [SOFTWARE]: {
-      data: [],
-      page: 1,
-      lastPage: Infinity
+      data: COMMON_DEFAULTS.data,
+      page: COMMON_DEFAULTS.page,
+      lastPage: COMMON_DEFAULTS.lastPage
     }
   },
 
