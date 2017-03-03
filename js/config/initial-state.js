@@ -17,9 +17,6 @@ export default {
 
   professors: {
     clearListView: false,
-    page: 1,
-    lastPage: Infinity,
-    data: [],
     currentCourse: ALL,
     error: false,
 
