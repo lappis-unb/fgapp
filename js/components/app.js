@@ -6,9 +6,9 @@ import {
   DrawerLayoutAndroid,
 } from 'react-native';
 
-import MainMenu from './main-menu';
 import DrawerMenu from './drawer-menu';
 import AppRoutes from './app-routes';
+import MainMenuContainer from '../containers/main-menu-container'
 
 // TODO: Fix this workaround. The field `positions` is undefined in tests
 let drawerPos = undefined;
@@ -60,7 +60,7 @@ export default class App extends Component {
         </View>
 
         <View style={styles.mainMenuContainer}>
-          <MainMenu toggleDrawerMenu={this.toggleDrawer} closeDrawerMenu={this.closeDrawer} />
+          <MainMenuContainer toggleDrawerMenu={this.toggleDrawer} closeDrawerMenu={this.closeDrawer} />
         </View>
       </View>
     );

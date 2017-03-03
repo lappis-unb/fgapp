@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
@@ -13,11 +13,20 @@ import Dimensions from 'Dimensions';
 const iconSize = parseInt(Dimensions.get('window').width / 10);
 
 export default class MainMenu extends Component {
+  changeScene(sceneKey) {
+    Actions[sceneKey] ({type: 'replace'});
+    this.props.updateTitle(sceneKey);
+  }
+
+  highlightButton(page) {
+    return this.props.actualPage === page ? styles.highlightedContainer : undefined;
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.newsContainer}>
-          <TouchableOpacity onPress={() => { Actions.FgaNews({type: 'replace'}) }}>
+        <View style={[styles.newsContainer, this.highlightButton('FgaNews')]}>
+          <TouchableOpacity onPress={() => this.changeScene('FgaNews')}>
             <Icon name="newspaper-o" style={styles.iconStyle} />
           </TouchableOpacity>
         </View>
@@ -35,9 +44,8 @@ export default class MainMenu extends Component {
           </TouchableOpacity>
         </View>
 */}
-
-        <View style={styles.professorsContainer}>
-          <TouchableOpacity onPress={() => { Actions.FgaProfessors({type: 'replace'}) }}>
+        <View style={[styles.professorsContainer, this.highlightButton('FgaProfessors')]}>
+          <TouchableOpacity onPress={() => this.changeScene('FgaProfessors')}>
             <Icon name="users" style={styles.iconStyle} />
           </TouchableOpacity>
         </View>
@@ -76,7 +84,12 @@ const styles = StyleSheet.create({
   professorsContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+  },
+
+  highlightedContainer: {
+    borderBottomWidth: 5,
+    borderBottomColor: '#fff'
   }
 
 });
