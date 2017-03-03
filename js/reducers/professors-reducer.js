@@ -35,13 +35,6 @@ const verifyLastPageChanged = (state, nextLastPage) => {
 
 const professorsReducer = (state=initialState.professors, action) => {
   switch(action.type) {
-    case 'SET_CLEAR_PROFESSORS_LIST_VIEW':
-      return update(state, {
-        clearListView: {
-          $set: action.clearListView
-        }
-      });
-
     case 'ADD_PROFESSORS':
       return update(state, {
         [action.course]: {
@@ -57,9 +50,6 @@ const professorsReducer = (state=initialState.professors, action) => {
         },
         currentCourse: {
           $set: action.course
-        },
-        clearListView: {
-          $set: action.clearListView
         }
       });
 

@@ -22,7 +22,6 @@ export default {
   },
 
   professors: {
-    clearListView: false,
     currentCourse: ALL,
     error: false,
 
