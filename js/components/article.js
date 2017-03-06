@@ -7,7 +7,14 @@ import {
   Linking
 } from 'react-native';
 
+import Dimensions from 'Dimensions';
+
 const baseURL = "https://fga.unb.br";
+const width = parseInt(Dimensions.get('window').width);
+const height = parseInt(Dimensions.get('window').height);
+
+const imageWidth = parseInt(width * 0.8);
+const imageHeight = parseInt(imageWidth / width);
 
 export default class Article extends Component {
 
@@ -26,12 +33,26 @@ export default class Article extends Component {
 
   parseHtml(text) {
     text = this.parseImageLink(text);
+    text = this.parseWidthValue(text);
+    text = this.parseHeightValue(text);
+
     return this.parseCustomCss(text);
   }
 
   parseImageLink(text) {
     let htmlSrcRegex = /src="/gim;
     return text.replace(htmlSrcRegex, 'src="' + baseURL);
+  }
+
+  parseWidthValue(text) {
+    let htmlWidthRegex = /width="[^"]*"/gim;
+    return text.replace(htmlWidthRegex, 'width="' + imageWidth + '"');
+  }
+
+  parseHeightValue(text) {
+    let htmlHeightRegex = /height="[^"]*"/gim;
+    let originalHeight = parseInt(htmlHeightRegex);
+    return text.replace(htmlHeightRegex, 'height="' + imageHeight * originalHeight + '"');
   }
 
   parseCustomCss(text) {
