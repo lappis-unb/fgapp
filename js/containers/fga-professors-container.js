@@ -4,51 +4,41 @@ import FgaProfessors from '../components/fga-professors';
 
 import { ALL } from '../config/professor-communities';
 
-const mapStateToProps = (state) => ({
-  professors: state.professors.data.filter(professor => {
-    const displayAll = state.professors.currentCourse === ALL;
-    const professorInCurrentCourse = professor.course_id === state.professors.currentCourse;
+const mapStateToProps = (state) => {
+  const selectedCourse = state.professors[state.professors.currentCourse];
 
-    return displayAll || professorInCurrentCourse;
-  }),
-
-  clearListView: state.professors.clearListView,
-  page: state.professors.page,
-  lastPage: state.professors.lastPage,
-  course: state.professors.currentCourse,
-  error: state.professors.error
-});
+  return {
+    professors: selectedCourse.data,
+    page: selectedCourse.page,
+    lastPage: selectedCourse.lastPage,
+    course: state.professors.currentCourse,
+    error: state.professors.error
+  }
+};
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchProfessors: (id) => {
-    dispatch({
-      type: 'SET_CLEAR_PROFESSORS_LIST_VIEW',
-      clearListView: true
-    });
+  fetchProfessors(courseId, page, lastPage) {
+    if ( page > lastPage ) {
+      return;
+    }
 
-    ProfessorsService.get(id)
-      .then((response) => response.data)
-      .then((data) => {
-        const professors = data.people.map(professor => ({
-          id: professor.id,
-          name: professor.name,
-          image: professor.image,
-          additional_data: professor.additional_data,
-          course_id: id
-        }));
-
+    ProfessorsService.get(courseId, page)
+      .then(data => {
         dispatch({
           type: 'ADD_PROFESSORS',
-          professors,
-          currentCourse: id,
-          clearListView: false
+          professors: data.professors,
+          course: courseId,
+          page,
+          lastPage: data.lastPage
         });
       })
       .catch(error => {
+        console.error(error);
+
         dispatch({
           type: 'SET_PROFESSORS_ERROR',
           error: true
-        })
+        });
       });
   },
 
@@ -57,12 +47,17 @@ const mapDispatchToProps = (dispatch) => ({
       type: 'SET_PROFESSORS_ERROR',
       error
     })
+  },
+
+  changeCourse(courseId) {
+    dispatch({
+      type: 'CHANGE_CURRENT_COURSE',
+      courseId
+    });
   }
 });
 
-const FgaProfessorsContainer = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-) (FgaProfessors);
-
-export default FgaProfessorsContainer;
+);

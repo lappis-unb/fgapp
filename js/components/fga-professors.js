@@ -9,69 +9,80 @@ import {
   ActivityIndicator
 } from 'react-native';
 
+import FgaProfessorsContainer from '../containers/fga-professors-container';
 import ProfessorsListItem from './professors-list-item';
-
 import ProfessorsService from '../services/professors-service';
-
 import communitiesId from '../config/professor-communities';
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id != r2.id});
 
-export default class FgaProfessors extends Component {
+class FgaProfessors extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      dataSource: ds.cloneWithRows(this.professorsToDisplay(props)),
+      dataSource: ds.cloneWithRows(props.professors),
     }
 
     this.changeCourse = this.changeCourse.bind(this);
+    this.fetchMoreProfessors = this.fetchMoreProfessors.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.professors.length === 0) {
-      this.props.fetchProfessors(this.props.course);
-    }
+    this.verifyInitialFetchProfessors(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
+    this.verifyInitialFetchProfessors(nextProps);
+
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this.professorsToDisplay(nextProps))
+      dataSource: this.state.dataSource.cloneWithRows(nextProps.professors)
     });
   }
 
-  professorsToDisplay(props) {
-    let professors = [];
-
-    if (!props.clearListView) {
-      professors = props.professors;
+  verifyInitialFetchProfessors(props) {
+    if (props.professors.length === 0) {
+      this.props.fetchProfessors(props.course, props.page, props.lastPage);
     }
-
-    return professors;
   }
 
   buildRowData(rowData) {
-    return <ProfessorsListItem
-              name={rowData.name}
-              image={rowData.image}
-              additional_data={rowData.additional_data}
-           />
+    return (
+      <ProfessorsListItem
+        key={rowData.id}
+        name={rowData.name}
+        image={rowData.image}
+        additional_data={rowData.additional_data}
+      />
+    );
   }
 
   updatePageError() {
     this.props.professorsError(false);
-    this.props.fetchProfessors(this.props.course);
+    this.props.fetchProfessors(this.props.course, this.props.page, this.props.lastPage);
   }
 
   changeCourse(course) {
-    this.props.fetchProfessors(course);
+    // Clear ListView so that there is professores with the wrong avatar
+    this.setState({
+      dataSource: ds.cloneWithRows([])
+    });
+    this.props.changeCourse(course);
+  }
+
+  fetchMoreProfessors() {
+    this.props.fetchProfessors(
+      this.props.course,
+      this.props.page + 1,
+      this.props.lastPage
+    );
   }
 
   render() {
     return (
       <View style={{flex: 1}}>
         <Choose>
-          <When condition={this.props.error}>
+          <When condition={ this.props.error }>
             <View style={styles.error}>
               <Text style={styles.textError}> Ocorreu um erro
               durante o carregamento dos dados!</Text>
@@ -83,8 +94,9 @@ export default class FgaProfessors extends Component {
                 />
             </View>
           </When>
+
           <When condition={ this.props.professors.length === 0 }>
-            <ActivityIndicator  size={60} color="#21ba57" style={styles.activity} />
+            <ActivityIndicator size={60} color="#21ba57" style={styles.activity} />
           </When>
 
           <When condition={ this.props.professors.length > 0 }>
@@ -104,6 +116,8 @@ export default class FgaProfessors extends Component {
               dataSource={this.state.dataSource}
               renderRow={(rowData) => this.buildRowData(rowData) }
               enableEmptySections={true}
+              initialListSize={20}
+              onEndReached={this.fetchMoreProfessors}
             />
           </When>
         </Choose>
@@ -111,6 +125,9 @@ export default class FgaProfessors extends Component {
     );
   }
 }
+
+export default FgaProfessorsContainer (FgaProfessors);
+
 const styles = StyleSheet.create({
   activity: {
     flex: 1,

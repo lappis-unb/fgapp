@@ -1,5 +1,5 @@
 import update from 'immutability-helper'; // See: https://github.com/kolodny/immutability-helper
-import { initialState } from '../config/store';
+import initialState from '../config/initial-state';
 
 const pagesReducer = (state=initialState.pages, action) => {
   switch(action.type) {
