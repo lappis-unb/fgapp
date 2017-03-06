@@ -1,12 +1,10 @@
 import { COMMON_DEFAULTS } from '../config/initial-state';
 
 export function getLastPageFromHeaderLink(link="") {
-  if (!link || link.length === 0) return COMMON_DEFAULTS.lastPage;
+  if (!link || link.length === 0 || !link.match(/page=\d+/g)) return COMMON_DEFAULTS.lastPage;
 
-  const params = link.split(/\&/);
-  const pages = params.filter(page => page.match(/page=/))
-                      .map(page => page.replace(/page=/, ''));
-  const lastPage = pages.map(value => parseInt(value))
+  const pages = link.match(/page=\d+/g)
+  const lastPage = pages.map(page => parseInt(page.replace(/page=/, '')))
                         .sort()
                         .reverse() [0];
   return lastPage;
