@@ -100,7 +100,7 @@ exports[`test renders correctly 1`] = `
     <View
       style={
         Object {
-          "backgroundColor": "#009b37",
+          "backgroundColor": "#146d43",
           "flex": 1,
           "flexDirection": "row",
         }
