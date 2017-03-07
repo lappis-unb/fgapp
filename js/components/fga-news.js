@@ -21,7 +21,8 @@ class FgaNews extends Component {
     super(props);
 
     this.state = {
-      dataSource: ds.cloneWithRows(props.articles)
+      dataSource: ds.cloneWithRows([]),
+      loading: true
     }
 
     this.fetchMoreArticles = this.fetchMoreArticles.bind(this);
@@ -30,6 +31,11 @@ class FgaNews extends Component {
   componentDidMount() {
     if (this.props.articles.length === 0) {
       this.props.fetchArticles(this.props.page, this.props.lastPage);
+    } else {
+      // Delay ListView filling for better performance on lower devices
+      setTimeout(() => {
+        this.updateListView(this.props);
+      }, 500);
     }
   }
 
@@ -38,8 +44,13 @@ class FgaNews extends Component {
       this.props.fetchArticles(nextProps.page, this.props.lastPage);
     }
 
+    this.updateListView(nextProps);
+  }
+
+  updateListView(props) {
     this.setState({
-      dataSource: ds.cloneWithRows(nextProps.articles),
+      dataSource: this.state.dataSource.cloneWithRows(props.articles),
+      loading: (props.articles.length === 0)
     });
   }
 
@@ -78,7 +89,7 @@ class FgaNews extends Component {
 						</View>
           </When>
 
-          <When condition={ this.props.articles.length === 0 }>
+          <When condition={ this.state.loading }>
             <ActivityIndicator size={60} color="#21ba57" />
           </When>
 
