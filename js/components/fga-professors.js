@@ -21,7 +21,8 @@ class FgaProfessors extends Component {
     super(props);
 
     this.state = {
-      dataSource: ds.cloneWithRows(props.professors),
+      dataSource: ds.cloneWithRows([]),
+      loading: true
     }
 
     this.changeCourse = this.changeCourse.bind(this);
@@ -29,14 +30,25 @@ class FgaProfessors extends Component {
   }
 
   componentDidMount() {
+    if (this.props.professors.length !== 0) {
+      // Delay ListView filling for better performance on lower devices
+      setTimeout(() => {
+        this.updateListView(this.props);
+      }, 500);
+    }
+
     this.verifyInitialFetchProfessors(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
+    this.updateListView(nextProps);
     this.verifyInitialFetchProfessors(nextProps);
+  }
 
+  updateListView(props) {
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(nextProps.professors)
+      dataSource: this.state.dataSource.cloneWithRows(props.professors),
+      loading: (props.professors.length === 0)
     });
   }
 
@@ -95,7 +107,7 @@ class FgaProfessors extends Component {
             </View>
           </When>
 
-          <When condition={ this.props.professors.length === 0 }>
+          <When condition={ this.state.loading }>
             <ActivityIndicator size={60} color="#21ba57" style={styles.activity} />
           </When>
 
