@@ -40,8 +40,8 @@ export default class Article extends Component {
   }
 
   parseImageLink(text) {
-    let htmlSrcRegex = /src="/gim;
-    return text.replace(htmlSrcRegex, 'src="' + baseURL);
+    let htmlSrcRegex = /src="\//gim;
+    return text.replace(htmlSrcRegex, `src="${baseURL}/`);
   }
 
   parseWidthValue(text) {
