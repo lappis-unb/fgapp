@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 
 import Dimensions from 'Dimensions';
+import { BASE_URL } from '../config/axios';
 
-const baseURL = "https://fga.unb.br";
 const width = parseInt(Dimensions.get('window').width);
 const height = parseInt(Dimensions.get('window').height);
 
@@ -41,7 +41,7 @@ export default class Article extends Component {
 
   parseImageLink(text) {
     let htmlSrcRegex = /src="\//gim;
-    return text.replace(htmlSrcRegex, `src="${baseURL}/`);
+    return text.replace(htmlSrcRegex, `src="${BASE_URL}/`);
   }
 
   parseWidthValue(text) {
