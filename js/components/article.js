@@ -31,17 +31,37 @@ export default class Article extends Component {
     }
   }
 
-  parseHtml(text) {
+  parseHtml(text="") {
     text = this.parseImageLink(text);
+    text = this.parseIframeSrc(text);
     text = this.parseWidthValue(text);
     text = this.parseHeightValue(text);
 
     return this.parseCustomCss(text);
   }
 
-  parseImageLink(text) {
-    let htmlSrcRegex = /src="\//gim;
-    return text.replace(htmlSrcRegex, `src="${BASE_URL}/`);
+  parseImageLink(text="") {
+    if (text.match(/<img/gim)) {
+      text = text.split(/src=\"/).map(chunk => {
+        // Dont put BASE_URL on external links
+        if (chunk.match(/\/\w+/gim) && chunk.indexOf('http') !== 0) {
+          chunk = `${BASE_URL}${chunk}`;
+        }
+
+        return chunk;
+      }).join('src="');
+    }
+
+    return text;
+  }
+
+  parseIframeSrc(text="") {
+    if (text.match(/iframe/gim)) {
+      const iframeSrc = /src="\//gim;
+      text = text.replace(iframeSrc, `src="http:/`);
+    }
+
+    return text;
   }
 
   parseWidthValue(text) {

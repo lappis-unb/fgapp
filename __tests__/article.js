@@ -9,12 +9,16 @@ import store from './../js/config/store';
 import { Provider } from 'react-redux';
 
 describe('Component Article', () => {
-  const testProps = {
-    title: 'Test title',
-    body: '<img src="/unb-gama/imagens/imagens.png" />',
-    date: '2016/04/04 10:10:10',
-    authorName: 'Test Author'
-  }
+  let testProps = {}
+
+  beforeEach(() => {
+    testProps = Object.assign(testProps, {
+      title: 'Test title',
+      body: '<img src="/unb-gama/imagens/imagens.png" />',
+      date: '2016/04/04 10:10:10',
+      authorName: 'Test Author'
+    });
+  });
 
 
   it('renders correctly', () => {
@@ -41,5 +45,24 @@ describe('Component Article', () => {
     const parsedImage = article.parseImageLink(image);
 
     expect(parsedImage).toBe(image);
+  });
+
+  it('it adds http to iframes without http', () => {
+    const iframeWithoutHttp = '<p><iframe src="//www.youtube.com/embed/5zrmw6E5GoA"  width="256" height="NaN"></iframe></p>';
+    const iframeWithHttp = '<p><iframe src="http://www.youtube.com/embed/5zrmw6E5GoA"  width="256" height="NaN"></iframe></p>';
+    const article = new Article(testProps);
+
+    const parsedIframe = article.parseIframeSrc(iframeWithoutHttp);
+
+    expect(parsedIframe).toBe(iframeWithHttp);
+  });
+
+  it('Wont add http to iframes with http', () => {
+    const iframeWithHttp = '<p><iframe src="http://www.youtube.com/embed/5zrmw6E5GoA"  width="256" height="NaN"></iframe></p>';
+    const article = new Article(iframeWithHttp);
+
+    const parsedIframe = article.parseIframeSrc(iframeWithHttp);
+
+    expect(parsedIframe).toBe(iframeWithHttp);
   });
 });
