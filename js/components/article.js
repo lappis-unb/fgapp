@@ -42,14 +42,38 @@ export default class Article extends Component {
 
   parseImageLink(text="") {
     const imageRegex = /(<img.+?src=")(.+?)(".+?>)/gim;
-    text = text.replace(imageRegex, "$1" + BASE_URL + "$2$3");
+    let matchesArray = [];
+
+    while((match = imageRegex.exec(text)) !== null){
+      if(match[2].indexOf('http') !== 0){
+        matchesArray.push(match[2]);
+      }
+    }
+
+    for(var i in matchesArray){
+      index = text.indexOf(matchesArray[i]);
+      var temp = text.slice(0, index) + BASE_URL + text.slice(index);
+      text = temp;
+    }
 
     return text;
   }
 
   parseIframeSrc(text="") {
     const iframeRegex = /(<iframe.+?src=")(.+?)(".+?<\/iframe>)/gim;
-    text = text.replace(iframeRegex, "$1http:/$2$3");
+    let matchesArray = [];
+
+    while((match = iframeRegex.exec(text)) !== null){
+      if(match[2].indexOf('http:') !== 0){
+        matchesArray.push(match[2]);
+      }
+    }
+
+    for(var i in matchesArray){
+      index = text.indexOf(matchesArray[i]);
+      var temp = text.slice(0, index) + 'http:' + text.slice(index);
+      text = temp;
+    }
 
     return text;
   }
