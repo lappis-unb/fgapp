@@ -2,9 +2,35 @@ exports[`test renders correctly 1`] = `
 <View
   style={
     Object {
+      "alignItems": "center",
       "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "center",
     }
   }>
+  <Text
+    accessible={true}
+    allowFontScaling={false}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": undefined,
+          "fontSize": 12,
+        },
+        Object {
+          "color": "white",
+          "fontSize": 16,
+        },
+        Object {
+          "fontFamily": "FontAwesome",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+      ]
+    }>
+    
+  </Text>
   <Text
     accessible={true}
     allowFontScaling={true}
@@ -12,9 +38,10 @@ exports[`test renders correctly 1`] = `
     numberOfLines={1}
     style={
       Object {
-        "color": "black",
-        "fontSize": 21,
+        "color": "white",
+        "fontSize": 16,
         "fontWeight": "bold",
+        "marginLeft": 10,
       }
     }>
     Não disponível.

@@ -112,7 +112,7 @@ class FgaProfessors extends Component {
           </When>
 
           <When condition={ this.props.professors.length > 0 }>
-              <Picker
+              <Picker style={styles.filter}
                 selectedValue={this.props.course}
                 onValueChange={this.changeCourse}
               >
@@ -159,5 +159,9 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     fontSize: 20,
     textAlign: 'center'
+  },
+  filter: {
+    backgroundColor: '#1ca95b',
+    color: 'white'
   }
 });
