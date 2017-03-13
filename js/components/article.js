@@ -41,25 +41,15 @@ export default class Article extends Component {
   }
 
   parseImageLink(text="") {
-    if (text.match(/<img/gim)) {
-      text = text.split(/src=\"/).map(chunk => {
-        // Dont put BASE_URL on external links
-        if (chunk.match(/\/\w+/gim) && chunk.indexOf('http') !== 0) {
-          chunk = `${BASE_URL}${chunk}`;
-        }
-
-        return chunk;
-      }).join('src="');
-    }
+    const imageRegex = /(<img.+?src=")(.+?)(".+?>)/gim;
+    text = text.replace(imageRegex, "$1" + BASE_URL + "$2$3");
 
     return text;
   }
 
   parseIframeSrc(text="") {
-    if (text.match(/iframe/gim)) {
-      const iframeSrc = /src="\//gim;
-      text = text.replace(iframeSrc, `src="http:/`);
-    }
+    const iframeRegex = /(<iframe.+?src=")(.+?)(".+?<\/iframe>)/gim;
+    text = text.replace(iframeRegex, "$1http:/$2$3");
 
     return text;
   }
