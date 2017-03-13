@@ -50,7 +50,7 @@ export default class NewsListItem extends Component {
                     </View>
                     <View style={styles.newsImageContainer}>
                       <Text>
-                        <Icon name="picture-o" style={styles.newsImagePlaceholder} />
+                        <Icon name="newspaper-o" style={styles.newsImagePlaceholder} />
                       </Text>
                     </View>
                   </View>
