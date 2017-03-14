@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 
 import Dimensions from 'Dimensions';
+import { BASE_URL } from '../config/axios';
 
-const baseURL = "https://fga.unb.br";
 const width = parseInt(Dimensions.get('window').width);
 const height = parseInt(Dimensions.get('window').height);
 
@@ -31,17 +31,51 @@ export default class Article extends Component {
     }
   }
 
-  parseHtml(text) {
+  parseHtml(text="") {
     text = this.parseImageLink(text);
+    text = this.parseIframeSrc(text);
     text = this.parseWidthValue(text);
     text = this.parseHeightValue(text);
 
     return this.parseCustomCss(text);
   }
 
-  parseImageLink(text) {
-    let htmlSrcRegex = /src="/gim;
-    return text.replace(htmlSrcRegex, 'src="' + baseURL);
+  parseImageLink(text="") {
+    const imageRegex = /(<img.+?src=")(.+?)(".+?>)/gim;
+    let matchesArray = [];
+
+    while((match = imageRegex.exec(text)) !== null){
+      if(match[2].indexOf('http') !== 0){
+        matchesArray.push(match[2]);
+      }
+    }
+
+    for(var i in matchesArray){
+      index = text.indexOf(matchesArray[i]);
+      var temp = text.slice(0, index) + BASE_URL + text.slice(index);
+      text = temp;
+    }
+
+    return text;
+  }
+
+  parseIframeSrc(text="") {
+    const iframeRegex = /(<iframe.+?src=")(.+?)(".+?<\/iframe>)/gim;
+    let matchesArray = [];
+
+    while((match = iframeRegex.exec(text)) !== null){
+      if(match[2].indexOf('http:') !== 0){
+        matchesArray.push(match[2]);
+      }
+    }
+
+    for(var i in matchesArray){
+      index = text.indexOf(matchesArray[i]);
+      var temp = text.slice(0, index) + 'http:' + text.slice(index);
+      text = temp;
+    }
+
+    return text;
   }
 
   parseWidthValue(text) {

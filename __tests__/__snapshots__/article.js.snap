@@ -1,4 +1,4 @@
-exports[`test renders correctly 1`] = `
+exports[`Component Article renders correctly 1`] = `
 <View
   style={
     Object {
@@ -26,7 +26,7 @@ exports[`test renders correctly 1`] = `
           "textAlign": "center",
         }
       }>
-      lala
+      Test title
     </Text>
   </View>
   <View
@@ -50,7 +50,7 @@ exports[`test renders correctly 1`] = `
       /
       2016
        
-      vitor
+      Test Author
     </Text>
   </View>
   <View
