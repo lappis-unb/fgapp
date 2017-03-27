@@ -2,6 +2,7 @@ exports[`test renders correctly 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "#FFFFFF",
       "flex": 1,
     }
   }>
