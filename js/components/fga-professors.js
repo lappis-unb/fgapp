@@ -14,6 +14,8 @@ import ProfessorsListItem from './professors-list-item';
 import ProfessorsService from '../services/professors-service';
 import communitiesId from '../config/professor-communities';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id != r2.id});
 
 class FgaProfessors extends Component {
@@ -112,25 +114,36 @@ class FgaProfessors extends Component {
           </When>
 
           <When condition={ this.props.professors.length > 0 }>
-              <Picker style={styles.filter}
-                selectedValue={this.props.course}
-                onValueChange={this.changeCourse}
-              >
-                <Picker.Item label="Todos" value={communitiesId.ALL} />
-                <Picker.Item label="Engenharia Aeroespacial" value={communitiesId.AEROESPACIAL} />
-                <Picker.Item label="Engenharia Automotiva" value={communitiesId.AUTOMOTIVA} />
-                <Picker.Item label="Engenharia de Energia" value={communitiesId.ENERGIA} />
-                <Picker.Item label="Engenharia Eletrônica" value={communitiesId.ELETRONICA} />
-                <Picker.Item label="Engenharia de Software" value={communitiesId.SOFTWARE} />
-              </Picker>
+            <View style={styles.professorsListHeader}>
+              <View style={styles.headerPicker}>
+                <Picker
+                  style={styles.filter}
+                  selectedValue={this.props.course}
+                  onValueChange={this.changeCourse}
+                >
+                  <Picker.Item label="Todos" value={communitiesId.ALL} />
+                  <Picker.Item label="Engenharia Aeroespacial" value={communitiesId.AEROESPACIAL} />
+                  <Picker.Item label="Engenharia Automotiva" value={communitiesId.AUTOMOTIVA} />
+                  <Picker.Item label="Engenharia de Energia" value={communitiesId.ENERGIA} />
+                  <Picker.Item label="Engenharia Eletrônica" value={communitiesId.ELETRONICA} />
+                  <Picker.Item label="Engenharia de Software" value={communitiesId.SOFTWARE} />
+                </Picker>
+              </View>
 
-            <ListView
-              dataSource={this.state.dataSource}
-              renderRow={(rowData) => this.buildRowData(rowData) }
-              enableEmptySections={true}
-              initialListSize={20}
-              onEndReached={this.fetchMoreProfessors}
-            />
+              <View style={styles.headerIcon}>
+                <Icon style={{color: 'white'}} name={'sort-desc'}/>
+              </View>
+            </View>
+
+            <View style={styles.professorsListView}>
+              <ListView
+                dataSource={this.state.dataSource}
+                renderRow={(rowData) => this.buildRowData(rowData) }
+                enableEmptySections={true}
+                initialListSize={20}
+                onEndReached={this.fetchMoreProfessors}
+              />
+            </View>
           </When>
         </Choose>
       </View>
@@ -161,7 +174,21 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   filter: {
-    backgroundColor: '#1ca95b',
+    backgroundColor: '#146d43',
     color: 'white'
+  },
+  professorsListHeader: {
+    backgroundColor: '#146d43',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  headerPicker: {
+    flex: 9,
+    paddingLeft: 10,
+    borderWidth: 0
+  },
+  headerIcon: {
+    backgroundColor: '#146d43',
+    flex: 1
   }
 });
