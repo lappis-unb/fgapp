@@ -7,6 +7,7 @@ import Professor from './professor';
 import Contact from './contact';
 import FgaNews from './fga-news';
 import FgaProfessors from './fga-professors';
+import Links from './links';
 
 import AppRoutesContainer from '../containers/app-router-container';
 
@@ -18,6 +19,7 @@ const AppRoutes = ({actualPage}) => (
     <Scene key="FgaProfessors" component={FgaProfessors} title='Professors' hideNavBar={true} initial={actualPage == 'FgaProfessors'}/>
     <Scene key="Professor" component={Professor} title='Professor' hideNavBar={true} />
     <Scene key="Contact" component={Contact} title='Contact' hideNavBar={true} initial={actualPage == 'Contact'} />
+    <Scene key="Links" component={Links} title='Links' hideNavBar={true} initial={actualPage == 'Links'}/>
   </Router>
 );
 

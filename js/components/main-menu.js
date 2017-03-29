@@ -26,6 +26,7 @@ class MainMenu extends Component {
   render() {
     return (
       <View style={styles.container}>
+
         <TouchableOpacity
           onPress={() => this.changeScene('FgaNews')}
           style={[styles.newsContainer, this.highlightButton('FgaNews')]}
@@ -48,6 +49,13 @@ class MainMenu extends Component {
         >
           <Icon name="plus" style={styles.iconStyle} />
           <Text style={styles.iconText}>Contato</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => this.changeScene('Links')}
+          style={[styles.linksContainer, this.highlightButton('Links')]}
+        >
+          <Icon name="link" style={styles.iconStyle} />
         </TouchableOpacity>
       </View>
     );
@@ -83,6 +91,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   contactContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  linksContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  professorsContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
