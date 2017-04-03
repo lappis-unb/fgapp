@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Dimensions from 'Dimensions';
 import MainMenuContainer from '../containers/main-menu-container';
 
-const iconSize = parseInt(Dimensions.get('window').width / 10);
+const iconSize = parseInt(Dimensions.get('window').width / 15);
 
 class MainMenu extends Component {
   changeScene(sceneKey) {
@@ -26,31 +26,29 @@ class MainMenu extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={[styles.newsContainer, this.highlightButton('FgaNews')]}>
-          <TouchableOpacity onPress={() => this.changeScene('FgaNews')}>
-            <Icon name="newspaper-o" style={styles.iconStyle} />
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          onPress={() => this.changeScene('FgaNews')}
+          style={[styles.newsContainer, this.highlightButton('FgaNews')]}
+        >
+          <Icon name="newspaper-o" style={styles.iconStyle} />
+          <Text style={styles.iconText}>Notícias</Text>
+        </TouchableOpacity>
 
-{/*
-        <View style={styles.eventsContainer}>
-          <TouchableOpacity onPress={() => { Actions.Events({type: 'replace'}) }}>
-            <Icon name="calendar" style={styles.iconStyle} />
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          onPress={() => this.changeScene('FgaProfessors')}
+          style={[styles.professorsContainer, this.highlightButton('FgaProfessors')]}
+        >
+          <Icon name="address-book-o" style={styles.iconStyle} />
+          <Text style={styles.iconText}>Professores</Text>
+        </TouchableOpacity>
 
-        <View style={styles.moreContainer}>
-          <TouchableOpacity onPress={() => { this.props.toggleDrawerMenu() }}>
-            <Icon name="bars" style={styles.iconStyle} />
-          </TouchableOpacity>
-        </View>
-*/}
-        <View style={[styles.professorsContainer, this.highlightButton('FgaProfessors')]}>
-          <TouchableOpacity onPress={() => this.changeScene('FgaProfessors')}>
-            <Icon name="users" style={styles.iconStyle} />
-          </TouchableOpacity>
-        </View>
-
+        <TouchableOpacity
+          onPress={() => { this.changeScene('Contact') }}
+          style={[styles.contactContainer, this.highlightButton('Contact')]}
+        >
+          <Icon name="plus" style={styles.iconStyle} />
+          <Text style={styles.iconText}>Contato</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -64,42 +62,33 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#146d43'
   },
-
   iconStyle: {
     fontSize: iconSize,
     color: 'white',
     paddingLeft: 20,
     paddingRight: 20,
   },
-
+  iconText: {
+    color: 'white',
+    fontSize: 12
+  },
   newsContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
   },
-
-  eventsContainer: {
+  professorsContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
   },
-
-  professorsContainer: {
+  contactContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
-
   highlightedContainer: {
     borderBottomWidth: 5,
     borderBottomColor: '#fff'
   }
-
 });
-
-{/*
-  moreContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-*/}
