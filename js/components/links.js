@@ -26,7 +26,7 @@ export default class Links extends Component {
               </Icon.Button>
             </View>
             <View style={styles.button}>
-              <Icon.Button name="graduation-cap" color="#146d43" backgroundColor="#fff" onPress={() => {this.clickButton('https://matriculaweb.unb.br/')}}>
+              <Icon.Button name="graduation-cap" color="#146d43" backgroundColor="#fff"  onPress={() => {this.clickButton('https://matriculaweb.unb.br/')}}>
                  Matrícula Web
               </Icon.Button>
             </View>

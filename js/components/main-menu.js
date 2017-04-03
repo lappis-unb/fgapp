@@ -56,6 +56,7 @@ class MainMenu extends Component {
           style={[styles.linksContainer, this.highlightButton('Links')]}
         >
           <Icon name="link" style={styles.iconStyle} />
+          <Text style={styles.iconText}>Links úteis</Text>
         </TouchableOpacity>
       </View>
     );
