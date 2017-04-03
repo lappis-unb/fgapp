@@ -150,10 +150,10 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 28
+    fontSize: 24
   },
   contactList: {
-    flex: 8,
+    flex: 9,
     paddingTop: 10,
     paddingLeft: 10,
     paddingRight: 10

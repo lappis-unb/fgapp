@@ -115,23 +115,21 @@ class FgaProfessors extends Component {
 
           <When condition={ this.props.professors.length > 0 }>
             <View style={styles.professorsListHeader}>
-              <View style={styles.headerPicker}>
+              <View style={styles.pickerHeader}>
                 <Picker
-                  style={styles.filter}
+                  style={styles.pickerFilter}
                   selectedValue={this.props.course}
                   onValueChange={this.changeCourse}
                 >
-                  <Picker.Item label="Todos" value={communitiesId.ALL} />
+                  <Picker.Item label="Todos" value={communitiesId.ALL}/>
                   <Picker.Item label="Engenharia Aeroespacial" value={communitiesId.AEROESPACIAL} />
                   <Picker.Item label="Engenharia Automotiva" value={communitiesId.AUTOMOTIVA} />
                   <Picker.Item label="Engenharia de Energia" value={communitiesId.ENERGIA} />
                   <Picker.Item label="Engenharia Eletrônica" value={communitiesId.ELETRONICA} />
                   <Picker.Item label="Engenharia de Software" value={communitiesId.SOFTWARE} />
                 </Picker>
-              </View>
 
-              <View style={styles.headerIcon}>
-                <Icon style={{color: 'white'}} name={'sort-desc'}/>
+                <Icon style={styles.pickerIcon} name={'sort-desc'}/>
               </View>
             </View>
 
@@ -173,22 +171,24 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center'
   },
-  filter: {
-    backgroundColor: '#146d43',
-    color: 'white'
-  },
   professorsListHeader: {
     backgroundColor: '#146d43',
     flexDirection: 'row',
     alignItems: 'center'
   },
-  headerPicker: {
+  pickerHeader: {
     flex: 9,
     paddingLeft: 10,
     borderWidth: 0
   },
-  headerIcon: {
+  pickerFilter: {
     backgroundColor: '#146d43',
-    flex: 1
+    color: 'white'
+  },
+  pickerIcon: {
+    color: 'white',
+    position: 'absolute',
+    top: 15,
+    right: 15
   }
 });
