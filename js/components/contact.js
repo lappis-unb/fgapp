@@ -6,7 +6,8 @@ import {
   WebView,
   Image,
   ScrollView,
-  ListView
+  ListView,
+  Linking
 } from 'react-native';
 
 import OpenEmail from './open-email';
@@ -76,6 +77,14 @@ export default class Contact extends Component {
     };
   }
 
+  handleEmail(email) {
+    Linking.openURL('mailto:' + email);
+  }
+
+  handlePhone(phone) {
+    Linking.openURL('tel:' + phone);
+  }
+
   listEntity(rowData) {
     return (
       <View style={styles.wrapper}>
@@ -86,11 +95,21 @@ export default class Contact extends Component {
         </View>
         <View style={styles.textContainer}>
           <For each="item" of={rowData.text}>
-            {/* put icon */}
-            {/*if item.title == Email */}
-            {/* OpenEmail */}
-            {/* else*/}
-            <Text key={item.id} style={styles.contactContent}>{item.content}</Text>
+
+            <Choose>
+              <When condition={rowData.title == "Emails"}>
+                <Text key={item.id} onPress={() => this.handleEmail(item.content)} style={styles.contactContent}>{item.content}</Text>
+              </When>
+
+              <When condition={rowData.title == "Telefone"}>
+                <Text key={item.id} onPress={() => this.handlePhone(item.content)} style={styles.contactContent}>{item.content}</Text>
+              </When>
+
+              <Otherwise>
+                <Text key={item.id} style={styles.contactContent}>{item.content}</Text>
+              </Otherwise>
+            </Choose>
+
           </For>
         </View>
       </View>
@@ -147,18 +166,16 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10
   },
-  iconContainer: {
-  },
   contactTitle: {
     color: '#005263',
     fontSize: 16,
-    fontWeight: 'bold'
-  },
-  textContainer: {
+    fontWeight: 'bold',
+    paddingBottom: 5
   },
   contactContent: {
     color: '#444',
-    fontSize: 16
+    fontSize: 16,
+    paddingBottom: 8
   }
 })
 
