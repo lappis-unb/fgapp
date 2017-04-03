@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   name: {
     color: 'white',
     fontSize: 28,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   emailInfo: {
     backgroundColor: '#1ca95b',
