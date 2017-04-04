@@ -66,8 +66,8 @@ export default class Links extends Component {
     return(
       <View>
         <For each="item" of={rowData.text}>
-          <View style={styles.button}>
-            <Icon.Button key={item.id} name={item.icon} color="#146d43" backgroundColor="#fff" onPress={() => {this.handleUrl(item.url)}} >
+          <View key={item.id} style={styles.button}>
+            <Icon.Button name={item.icon} color="#146d43" backgroundColor="#fff" onPress={() => {this.handleUrl(item.url)}} >
             {item.placeholder}
             </Icon.Button>
           </View>
