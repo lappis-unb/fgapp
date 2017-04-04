@@ -178,4 +178,3 @@ const styles = StyleSheet.create({
     paddingBottom: 8
   }
 })
-
