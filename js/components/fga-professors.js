@@ -6,7 +6,8 @@ import {
   Picker,
   Text,
   Button,
-  ActivityIndicator
+  ActivityIndicator,
+  TextInput
 } from 'react-native';
 
 import FgaProfessorsContainer from '../containers/fga-professors-container';
@@ -132,7 +133,13 @@ class FgaProfessors extends Component {
                 <Icon style={styles.pickerIcon} name={'sort-desc'}/>
               </View>
             </View>
-
+            <View>
+              <TextInput
+               style={styles.searchBar}
+               onChangeText={(text) => this.setState({text})}
+               value={this.state.text}
+               placeholder='Search'/>
+            </View>
             <View style={styles.professorsListView}>
               <ListView
                 dataSource={this.state.dataSource}
@@ -190,5 +197,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 15,
     right: 15
-  }
+  },
+  searchBar: {
+  paddingLeft: 30,
+  fontSize: 15,
+  height: 20,
+  flex: 1,
+  borderWidth: 15,
+  borderColor: '#E4E4E4'
+},
 });
