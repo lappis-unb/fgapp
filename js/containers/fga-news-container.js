@@ -27,7 +27,8 @@ const mapDispatchToProps = (dispatch) => ({
         body: article.body,
         title: article.title,
         created_at: article.created_at,
-        authorName: article.setting ? "por " + article.setting.author_name : ""
+        authorName: article.setting ? "por " + article.setting.author_name : "",
+        image: "https://fga.unb.br/articles/0001/7728/FLISOL-DF_2017.png"
       }));
 
       const lastPage = getLastPageFromHeaderLink(response.headers.link);
