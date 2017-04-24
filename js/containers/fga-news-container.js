@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
 import ArticleService from '../services/article-service';
 import FgaNews  from '../components/fga-news';
-import { getLastPageFromHeaderLink } from '../services/util';
+import {
+  getLastPageFromHeaderLink,
+  getFirstImageFromBody
+} from '../services/util';
 
 const mapStateToProps = (state) => ({
   articles: state.articles.data,
@@ -28,7 +31,7 @@ const mapDispatchToProps = (dispatch) => ({
         title: article.title,
         created_at: article.created_at,
         authorName: article.setting ? "por " + article.setting.author_name : "",
-        image: "https://fga.unb.br/articles/0001/7728/FLISOL-DF_2017.png"
+        image: getFirstImageFromBody(article.body)
       }));
 
       const lastPage = getLastPageFromHeaderLink(response.headers.link);

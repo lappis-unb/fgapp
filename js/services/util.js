@@ -9,3 +9,23 @@ export function getLastPageFromHeaderLink(link="") {
                         .reverse() [0];
   return lastPage;
 }
+
+export function getFirstImageFromBody(body) {
+  const imageRegex = /(<img.+?src=")(.+?)(".+?>)/gim;
+
+  match = imageRegex.exec(body);
+
+  let link = "";
+
+  if(match){
+    link = match[2];
+    if(link.indexOf('http:') !== 0){
+      link = "https://fga.unb.br" + link;
+    }
+  }
+  else{
+    link = "";
+  }
+
+  return link;
+}
