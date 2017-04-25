@@ -1,4 +1,5 @@
 import { COMMON_DEFAULTS } from '../config/initial-state';
+import { BASE_URL } from '../config/axios';
 
 export function getLastPageFromHeaderLink(link="") {
   if (!link || link.length === 0 || !link.match(/page=\d+/g)) return COMMON_DEFAULTS.lastPage;
@@ -20,7 +21,7 @@ export function getFirstImageFromBody(body) {
   if(match){
     link = match[2];
     if(link.indexOf('http:') !== 0){
-      link = "https://fga.unb.br" + link;
+      link = BASE_URL + link;
     }
   }
   else{

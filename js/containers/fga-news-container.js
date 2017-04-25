@@ -30,8 +30,7 @@ const mapDispatchToProps = (dispatch) => ({
         body: article.body,
         title: article.title,
         created_at: article.created_at,
-        authorName: article.setting ? "por " + article.setting.author_name : "",
-        image: getFirstImageFromBody(article.body)
+        authorName: article.setting ? "por " + article.setting.author_name : ""
       }));
 
       const lastPage = getLastPageFromHeaderLink(response.headers.link);

@@ -12,6 +12,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Dimensions from 'Dimensions';
 import { Card, Button } from 'react-native-material-design';
 
+import { getFirstImageFromBody } from '../services/util';
+
 const imageSize = parseInt(Dimensions.get('window').width);
 const monthNames = ["janeiro", "fevereiro", "março", "abril",
                     "maio", "junho", "julho", "agosto",
@@ -25,7 +27,8 @@ export default class NewsListItem extends Component {
 
     this.state = {
       day: date.getDate(),
-      month: monthNames[date.getMonth()]
+      month: monthNames[date.getMonth()],
+      image: getFirstImageFromBody(this.props.body)
     }
   }
 
@@ -44,12 +47,14 @@ export default class NewsListItem extends Component {
         <View style={styles.container}>
             <Card>
               <Card.Body>
-                <View style={styles.newsImageContainer}>
-                  <Image
-                    source={{uri: this.props.image}}
-                    style={styles.newsImage}
-                  />
-                </View>
+                <If condition={ this.state.image !== "" }>
+                  <View style={styles.newsImageContainer}>
+                    <Image
+                      source={{uri: this.state.image}}
+                      style={styles.newsImage}
+                    />
+                  </View>
+                </If>
                 <View style={styles.newsContentContainer}>
                   <Text style={styles.newsTitle}>{this.props.title}</Text>
                   <Text style={styles.newsDate}>{this.state.day} de {this.state.month}</Text>
