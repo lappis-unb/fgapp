@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
 import ArticleService from '../services/article-service';
 import FgaNews  from '../components/fga-news';
-import { getLastPageFromHeaderLink } from '../services/util';
+import {
+  getLastPageFromHeaderLink,
+  getFirstImageFromBody
+} from '../services/util';
 
 const mapStateToProps = (state) => ({
   articles: state.articles.data,

@@ -4,14 +4,17 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Dimensions from 'Dimensions';
 import { Card, Button } from 'react-native-material-design';
 
-const imageSize = parseInt(Dimensions.get('window').width / 5);
+import { getFirstImageFromBody } from '../services/util';
+
+const imageSize = parseInt(Dimensions.get('window').width);
 const monthNames = ["janeiro", "fevereiro", "março", "abril",
                     "maio", "junho", "julho", "agosto",
                     "setembro", "outubro", "novembro", "dezembro"];
@@ -24,7 +27,8 @@ export default class NewsListItem extends Component {
 
     this.state = {
       day: date.getDate(),
-      month: monthNames[date.getMonth()]
+      month: monthNames[date.getMonth()],
+      image: getFirstImageFromBody(this.props.body)
     }
   }
 
@@ -42,19 +46,20 @@ export default class NewsListItem extends Component {
       <TouchableOpacity onPress={() => this.goToArticle()}>
         <View style={styles.container}>
             <Card>
-                <Card.Body>
-                  <View style={styles.newsContainer}>
-                    <View style={styles.newsContent}>
-                      <Text style={styles.newsTitle}>{this.props.title}</Text>
-                      <Text style={styles.newsDate}>{this.state.day} de {this.state.month}</Text>
-                    </View>
-                    <View style={styles.newsImageContainer}>
-                      <Text>
-                        <Icon name="newspaper-o" style={styles.newsImagePlaceholder} />
-                      </Text>
-                    </View>
+              <Card.Body>
+                <If condition={ this.state.image !== "" }>
+                  <View style={styles.newsImageContainer}>
+                    <Image
+                      source={{uri: this.state.image}}
+                      style={styles.newsImage}
+                    />
                   </View>
-                </Card.Body>
+                </If>
+                <View style={styles.newsContentContainer}>
+                  <Text style={styles.newsTitle}>{this.props.title}</Text>
+                  <Text style={styles.newsDate}>{this.state.day} de {this.state.month}</Text>
+                </View>
+              </Card.Body>
             </Card>
         </View>
       </TouchableOpacity>
@@ -68,25 +73,27 @@ const styles = StyleSheet.create({
   },
 
   newsContainer: {
-    justifyContent: 'center',
-    flexDirection: 'row'
-  },
-
-  newsContent: {
-    flex: 2,
-    justifyContent: 'space-between'
+    flex: 1
   },
 
   newsImageContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: 'white'
   },
 
-  newsImagePlaceholder: {
+  newsImage: {
     flex: 1,
-    fontSize: imageSize,
-    color: '#a29d9d'
+    height: 100,
+    resizeMode: 'contain',
+    transform: [
+      { scaleX: 4 },
+      { scaleY: 4 },
+      { translateY: 35 }
+    ]
+  },
+
+  newsContentContainer: {
+    flex: 2,
+    justifyContent: 'space-between'
   },
 
   newsTitle: {

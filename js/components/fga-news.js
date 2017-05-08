@@ -64,6 +64,7 @@ class FgaNews extends Component {
               date={rowData.created_at}
               body={rowData.body}
               authorName={rowData.authorName}
+              image={rowData.image}
             />;
   }
 
